@@ -12,7 +12,6 @@ export default class Registro extends Component {
   render() {
     return (
       <View>
-        <Text>Nuestro Register</Text>
         <FormularioRegistro navigation={this.props.navigation}/>
         <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNav')}>
             <Text> No tenes cuenta? Vamos a Home</Text>

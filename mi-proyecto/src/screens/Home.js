@@ -2,52 +2,38 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Image, FlatList } from 'react-native'
 import Card from '../components/Card'
 
-class Home extends Component {
-
-    constructor(props){
-        super(props)
-        this.state={
-            data:[],
-            cargando: true,
-        }
-    }
-
-    
+class Home extends Component{
+  constructor(props){
+      super(props)
+  }
 
 
-  render() {
-    return (
-      <View>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')}>
-          <Text>Mandame a registro</Text>
-        </TouchableOpacity>
-            {this.state.cargando ? <ActivityIndicator size="large" color="blue" />  : 
-          <FlatList
-            data={this.state.data}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity>
-                <Card nombre={item.name} image={item.image} />
+  render(){
+      return(
+          <View>
+              <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
+                  <Text> Volver al registro</Text>
               </TouchableOpacity>
-            )}
-          />
-        }</View>
-    )
+           </View>
+      )
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    img:{
-      width: 200,
-      height: 200
-    }
-  });
-
+  button:{
+      backgroundColor: 'green',
+      borderRadius: 20,
+      borderWidth:2,
+      textAlign:'center',
+      padding:10
+  },
+  textoBtn:{
+      color:'white'
+  },
+  img: {
+      height:350
+  }
+ 
+})
 
 export default Home

@@ -25,7 +25,7 @@ loguearUsuario(email, password){
 
   render() {
     return (
-      <View>
+      <View style={styles.box}>
         <TextInput
         style={styles.input}
         placeholder='Email'
@@ -45,10 +45,8 @@ loguearUsuario(email, password){
         onPress={()=> (this.loguearUsuario(this.state.inputMail, this.state.inputPassword), 'HomeNav')}>
             <Text style={styles.btnText}>Loguearme</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-        style={styles.btn}
-        onPress={()=> (this.props.navigation.navigate('Registro'))}  >
-        <Text style={styles.btnText}> Ir al Registro </Text>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')} style={styles.btn}>
+            <Text style={styles.btnText}> Volver al registro</Text>
         </TouchableOpacity>
       </View>
     )
@@ -60,14 +58,19 @@ const styles = StyleSheet.create({
         borderWidth:1,
         brderColor:'#3d3d3d',
         marginTop: 24,
-        height:24,
+        height:20,
         padding:5,
+        marginLeft:440,
+        width: 300,
+        color:'white'
     },
     btn:{
         marginTop: 32, 
         backgroundColor:'black',
         padding:10,
         borderRadius:20,
+        width:170,
+        marginLeft:520,
     },
     btnText:{
         textAlign: 'center',
@@ -77,6 +80,9 @@ const styles = StyleSheet.create({
     },
      img: {
             height:80
+    },
+    box:{
+        backgroundColor:'pink'
     }
 })
 
