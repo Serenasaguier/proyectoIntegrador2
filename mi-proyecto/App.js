@@ -8,7 +8,7 @@ import HomeNav from './src/navigation/HomeNav';
 import Login from './src/components/Login';
 
 
-const Stack= createNativeStackNavigator()
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (

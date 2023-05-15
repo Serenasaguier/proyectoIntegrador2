@@ -1,8 +1,21 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { auth } from '../firebase/config'
 import React, { Component } from 'react'
+import FormularioRegistro from './FormularioRegistro'
+import Registro from '../screens/Registro'
 
 export default class Login extends Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            inputMail:'',
+            inputPassword:'',
+            userName:'',
+            miniBio:'',
+            alert: false,
+        }
+    }
 
 loguearUsuario(email, password){
     auth.signInWithEmailAndPassword(email,password)
@@ -13,7 +26,6 @@ loguearUsuario(email, password){
   render() {
     return (
       <View>
-
         <TextInput
         style={styles.input}
         placeholder='Email'
@@ -28,27 +40,15 @@ loguearUsuario(email, password){
         value={this.state.inputPassword}
         secureTextEntry={true}
         />
-        <TextInput
-         style={styles.input}
-         placeholder= 'User Name'
-         onChangeText={(text)=> this.setState({userName:text})}
-         value={this.state.userName}
-        />
-        <TextInput
-         style={styles.input}
-         placeholder= 'Mini Bio'
-         onChangeText={(text)=> this.setState({miniBio:text})}
-         value={this.state.miniBio}
-        />
-        <Image
-      /* EL USUARIO TIENE QUE PONER SU IMAGEN */  source={{uri: 'https://thumbs.dreamstime.com/b/sentada-del-perrito-de-labrador-30817211.jpg'}}
-        style={styles.img}
-        resizeMode='contain'
-        />
         <TouchableOpacity
         style={styles.btn}
-        onPress={()=> this.loguearUsuario(this.state.inputMail, this.state.inputPassword)}>
-            <Text style={styles.btnText}>Loguear mi usuario</Text>
+        onPress={()=> (this.loguearUsuario(this.state.inputMail, this.state.inputPassword), 'HomeNav')}>
+            <Text style={styles.btnText}>Loguearme</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        style={styles.btn}
+        onPress={()=> (this.props.navigation.navigate('Registro'))}  >
+        <Text style={styles.btnText}> Ir al Registro </Text>
         </TouchableOpacity>
       </View>
     )

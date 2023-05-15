@@ -9,11 +9,25 @@ import React, { Component } from 'react'
         inputMail:'',
         inputPassword:'',
         userName:'',
-        miniBio:''
+        miniBio:'',
+        alert: false,
     }
 }
 
-registrarUsuario(mail,password){
+registrarUsuario(mail,password,userName){
+
+    if (mail === "" ) {
+        this.setState({alert:true});
+    }
+
+    if (password === "" ) {
+        this.setState({alert:true});
+    }
+
+    if (userName === "" ) {
+        this.setState({alert:true});
+    }
+
     auth.createUserWithEmailAndPassword(mail, password)
     .then(data => console.log(data))
     .catch(err => console.log(err))
@@ -28,7 +42,6 @@ loguearUsuario(email, password){
   render() {
     return (
       <View>
-
         <TextInput
         style={styles.input}
         placeholder='Email'
@@ -36,6 +49,7 @@ loguearUsuario(email, password){
         onChangeText={(text)=> this.setState({inputMail: text}) }
         value={this.state.inputMail}
         />
+
         <TextInput
         style={styles.input}
         placeholder= 'Password'
@@ -43,6 +57,12 @@ loguearUsuario(email, password){
         value={this.state.inputPassword}
         secureTextEntry={true}
         />
+
+        { this.state.alert && (
+            <View>
+                <Text> El campo de contraseña debe completarse</Text>
+            </View>
+        )}
         <TextInput
          style={styles.input}
          placeholder= 'User Name'
@@ -55,8 +75,7 @@ loguearUsuario(email, password){
          onChangeText={(text)=> this.setState({miniBio:text})}
          value={this.state.miniBio}
         />
-        <Image
-      /* EL USUARIO TIENE QUE PONER SU IMAGEN */  source={{uri: 'https://thumbs.dreamstime.com/b/sentada-del-perrito-de-labrador-30817211.jpg'}}
+        <Image /* EL USUARIO TIENE QUE PONER SU IMAGEN */  source={{uri: 'https://thumbs.dreamstime.com/b/sentada-del-perrito-de-labrador-30817211.jpg'}}
         style={styles.img}
         resizeMode='contain'
         />
@@ -68,11 +87,7 @@ loguearUsuario(email, password){
         <TouchableOpacity
         style={styles.btn}
         onPress={()=> (this.loguearUsuario(this.state.inputMail, this.state.inputPassword),this.props.navigation.navigate('Login'))}  >
-        <Text style={styles.btnText}>Loguear mi usuario</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Home')}>
-            <Text>Estoy desde el componenete FormRegister</Text>
+        <Text style={styles.btnText}> Ir al Login </Text>
         </TouchableOpacity>
       </View>
     )
