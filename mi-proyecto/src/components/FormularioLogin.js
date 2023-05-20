@@ -1,25 +1,21 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { auth } from '../firebase/config'
 import React, { Component } from 'react'
-import FormularioRegistro from './FormularioRegistro'
-import Registro from '../screens/Registro'
 
-export default class Login extends Component {
+export default class FormularioLogin extends Component {
 
     constructor(props){
         super(props)
         this.state={
-            inputMail:'',
-            inputPassword:'',
-            userName:'',
-            miniBio:'',
+            email:'',
+            password:'',
             alert: false,
         }
     }
 
-loguearUsuario(email, password){
-    auth.signInWithEmailAndPassword(email,password)
-    .then(data => console.log(data))
+loguearUsuario(mail, password){
+    auth.signInWithEmailAndPassword(mail,password)
+    .then(data => this.props.navigation.navigate('HomeNav'))
     .catch(err => console.log(err))
 }
 
@@ -30,25 +26,23 @@ loguearUsuario(email, password){
         style={styles.input}
         placeholder='Email'
         keyboardType='email-address'
-        onChangeText={(text)=> this.setState({inputMail: text}) }
-        value={this.state.inputMail}
+        onChangeText={(text)=> this.setState({email: text}) }
+        value={this.state.email}
         />
         <TextInput
         style={styles.input}
         placeholder= 'Password'
-        onChangeText={(text)=> this.setState({inputPassword:text})}
-        value={this.state.inputPassword}
+        onChangeText={(text)=> this.setState({password:text})}
+        value={this.state.password}
         secureTextEntry={true}
         />
         <TouchableOpacity
         style={styles.btn}
-        onPress={()=> (this.loguearUsuario(this.state.inputMail, this.state.inputPassword), 'HomeNav')}>
+        onPress={()=> this.loguearUsuario(this.state.email, this.state.password)}>
             <Text style={styles.btnText}>Loguearme</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')} style={styles.btn}>
-            <Text style={styles.btnText}> Volver al registro</Text>
-        </TouchableOpacity>
       </View>
+
     )
   }
 }

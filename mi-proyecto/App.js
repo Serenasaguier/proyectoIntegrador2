@@ -5,7 +5,7 @@ import Registro from './src/screens/Registro';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeNav from './src/navigation/HomeNav';
-import Login from './src/components/Login';
+import Login from './src/screens/Login';
 
 
 const Stack = createNativeStackNavigator()
@@ -14,9 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Register' component={Registro}/>
+        <Stack.Screen name='Registro' component={Registro} options={{headerShown:false}}/>
         <Stack.Screen name='HomeNav' component={HomeNav} options={{headerShown:false}}/>
-        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='Login' component={Login} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

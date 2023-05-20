@@ -1,5 +1,5 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import { auth } from '../firebase/config'
+import { auth, db } from '../firebase/config'
 import React, { Component } from 'react'
 
  class FormularioRegistro extends Component {
@@ -14,7 +14,7 @@ import React, { Component } from 'react'
     }
 }
 
-registrarUsuario(mail,password,userName){
+registrarUsuario(mail,password){
 
     if (mail === "" ) {
         this.setState({alert:true});
@@ -24,12 +24,16 @@ registrarUsuario(mail,password,userName){
         this.setState({alert:true});
     }
 
-    if (userName === "" ) {
-        this.setState({alert:true});
-    }
-
     auth.createUserWithEmailAndPassword(mail, password)
-    .then(data => console.log(data))
+    .then(data => 
+        this.props.navigation.navigate('HomeNav'),
+        db.collection('users').add({
+            owner: auth.currentUser.email,
+            createdAt: Date.now()
+        })
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
+        )
     .catch(err => console.log(err))
 }
 
@@ -81,13 +85,8 @@ loguearUsuario(email, password){
         />
         <TouchableOpacity
         style={styles.btn}
-        onPress={()=> this.registrarUsuario((this.state.inputMail, this.state.inputPassword), 'Login')}>
+        onPress={()=> this.registrarUsuario(this.state.inputMail, this.state.inputPassword)}>
             <Text style={styles.btnText}>Registrar mi usuario</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        style={styles.btn}
-        onPress={()=> (this.loguearUsuario(this.state.inputMail, this.state.inputPassword),this.props.navigation.navigate('Login'))}  >
-        <Text style={styles.btnText}> Ir al Login </Text>
         </TouchableOpacity>
       </View>
     )

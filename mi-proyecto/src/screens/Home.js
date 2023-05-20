@@ -11,7 +11,7 @@ class Home extends Component{
   render(){
       return(
           <View>
-              <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
+              <TouchableOpacity onPress={()=> this.props.navigation.navigate('Registro')}>
                   <Text> Volver al registro</Text>
               </TouchableOpacity>
            </View>

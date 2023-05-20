@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, Touchable } from 'react-native'
 import React, { Component } from 'react'
 import FormularioRegistro from '../components/FormularioRegistro'
+import { auth } from '../firebase/config'
 
 export default class Registro extends Component {
     constructor(props){
@@ -9,13 +10,25 @@ export default class Registro extends Component {
             
         }
     }
+
+    componentDidMount(){
+      auth.onAuthStateChanged(user => {
+        if(user){
+          this.props.navigation.navigate('HomeNav')
+        }
+      })
+    }
+
   render() {
     return (
       <View>
         <FormularioRegistro navigation={this.props.navigation}/>
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNav')}>
-            <Text> No tenes cuenta? Vamos a Home</Text>
+        <Text>
+          Ya tenes cuenta?
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+            <Text> Ir al Login</Text>
         </TouchableOpacity>
+        </Text>
       </View>
     )
   }
