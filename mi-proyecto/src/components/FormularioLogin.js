@@ -1,6 +1,7 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { auth } from '../firebase/config'
 import React, { Component } from 'react'
+import Profile from '../screens/Profile'
 
 export default class FormularioLogin extends Component {
 
@@ -15,7 +16,7 @@ export default class FormularioLogin extends Component {
 
 loguearUsuario(mail, password){
     auth.signInWithEmailAndPassword(mail,password)
-    .then(data => this.props.navigation.navigate('HomeNav'))
+    .then(data => this.props.navigation.navigate('Feed'))
     .catch(err => console.log(err))
 }
 

@@ -1,6 +1,7 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { auth, db } from '../firebase/config'
 import React, { Component } from 'react'
+import Login from '../screens/Login'
 
  class FormularioRegistro extends Component {
     constructor(props){
@@ -24,9 +25,11 @@ registrarUsuario(mail,password){
         this.setState({alert:true});
     }
 
+
+
     auth.createUserWithEmailAndPassword(mail, password)
     .then(data => 
-        this.props.navigation.navigate('HomeNav'),
+        this.props.navigation.navigate('Login'),
         db.collection('users').add({
             owner: auth.currentUser.email,
             createdAt: Date.now()
