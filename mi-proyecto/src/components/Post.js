@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import { AntDesign } from '@expo/vector-icons'; 
-import { db } from '../firebase/config';
+import { db, auth } from '../firebase/config';
 import {FontAwesome} from '@expo/vector-icons'
 import firebase from 'firebase';
 
@@ -10,14 +10,32 @@ export default class Post extends Component {
     constructor(props){
         super(props)
         this.state={
-            likeado: true
+            likeado: false
+        }
+    }
+
+    componentDidMount(){
+        let estaLikeado = this.props.data.data.likes.includes(auth.currentUser.email)
+        if (estaLikeado === true) {
+            this.setState({
+                likeado:true
+            })
         }
     }
 
     likeadoUnaVez(){
-        this.setState({
-            likeado:false
+
+        db.collection('posts').doc(this.props.data.id)
+        .update({
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
+        .then((resp)=> {
+            this.setState({
+                likeado:false
+            })
+        })
+        .catch(err => console.log(err))
+        
     }
 
     liked(){
@@ -27,14 +45,10 @@ export default class Post extends Component {
         })
         .then((resp)=> {
             this.setState({
-                liked: true
+                likeado: true
             })
         })
         .catch(err => console.log(err))
-
-        this.setState({
-            likeado:true
-        })
     }
 
   render() {
@@ -47,7 +61,7 @@ export default class Post extends Component {
           onPress={()=> this.likeadoUnaVez()}
           >
             <FontAwesome
-            name='heart-o'
+            name='heart'
             size={24}
             color='red'
             />
@@ -57,7 +71,7 @@ export default class Post extends Component {
           onPress={()=> this.liked()}
           >
             <FontAwesome
-            name='heart'
+            name='heart-o'
             size={24}
             color='red'
             />

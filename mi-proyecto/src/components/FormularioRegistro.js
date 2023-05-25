@@ -49,6 +49,13 @@ loguearUsuario(email, password){
   render() {
     return (
       <View>
+
+        { this.state.alert && (
+            <View>
+                <Text> El campo debe completarse</Text>
+            </View>
+        )}
+          
         <TextInput
         style={styles.input}
         placeholder='Email'
@@ -65,11 +72,6 @@ loguearUsuario(email, password){
         secureTextEntry={true}
         />
 
-        { this.state.alert && (
-            <View>
-                <Text> El campo de contraseña debe completarse</Text>
-            </View>
-        )}
         <TextInput
          style={styles.input}
          placeholder= 'User Name'
