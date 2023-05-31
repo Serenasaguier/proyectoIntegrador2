@@ -1,7 +1,6 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { auth } from '../firebase/config'
 import React, { Component } from 'react'
-import Profile from '../screens/Profile'
 
 export default class FormularioLogin extends Component {
 
@@ -16,8 +15,12 @@ export default class FormularioLogin extends Component {
 
 loguearUsuario(mail, password){
     auth.signInWithEmailAndPassword(mail,password)
-    .then(data => this.props.navigation.navigate('Feed'))
-    .catch(err => console.log(err))
+    .then(data => 
+    this.props.navigation.navigate('HomeNav')
+    )
+    .catch(err => this.setState({
+        alert:true
+    }))
 }
 
   render() {
@@ -37,6 +40,13 @@ loguearUsuario(mail, password){
         value={this.state.password}
         secureTextEntry={true}
         />
+        { this.state.alert ?
+            <View>
+                <Text> Hay un error en tu logueo</Text>
+            </View>
+            :
+            null
+        }
         <TouchableOpacity
         style={styles.btn}
         onPress={()=> this.loguearUsuario(this.state.email, this.state.password)}>

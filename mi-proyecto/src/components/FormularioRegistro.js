@@ -15,29 +15,26 @@ import Login from '../screens/Login'
     }
 }
 
-registrarUsuario(mail,password){
+registrarUsuario(mail,password,userName, miniBio){
 
-    if (mail === "" ) {
+    if (mail === "" || password === "" || userName === ""  ) {
         this.setState({alert:true});
-    }
-
-    if (password === "" ) {
-        this.setState({alert:true});
-    }
-
-
-
-    auth.createUserWithEmailAndPassword(mail, password)
-    .then(data => 
-        this.props.navigation.navigate('Login'),
-        db.collection('users').add({
-            owner: auth.currentUser.email,
-            createdAt: Date.now()
+    } else (
+        auth.createUserWithEmailAndPassword(mail, password)
+        .then(data => {
+            db.collection('users').add({
+                owner: auth.currentUser.email,
+                createdAt: Date.now(),
+                userName: userName,
+                miniBio: miniBio
+            },
+            this.props.navigation.navigate('Login'))
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         })
-        .then(resp => console.log(resp))
         .catch(err => console.log(err))
-        )
-    .catch(err => console.log(err))
+    )
+   
 }
 
 loguearUsuario(email, password){
@@ -90,7 +87,7 @@ loguearUsuario(email, password){
         />
         <TouchableOpacity
         style={styles.btn}
-        onPress={()=> this.registrarUsuario(this.state.inputMail, this.state.inputPassword)}>
+        onPress={()=> this.registrarUsuario(this.state.inputMail, this.state.inputPassword, this.state.userName)}>
             <Text style={styles.btnText}>Registrar mi usuario</Text>
         </TouchableOpacity>
       </View>

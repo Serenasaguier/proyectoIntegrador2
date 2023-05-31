@@ -14,7 +14,7 @@ export default class Registro extends Component {
     componentDidMount(){
       auth.onAuthStateChanged(user => {
         if(user){
-          this.props.navigation.navigate('HomeNav')
+          this.props.navigation.navigate('Login')
         }
       })
     }

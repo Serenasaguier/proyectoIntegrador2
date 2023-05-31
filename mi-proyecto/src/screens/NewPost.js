@@ -1,9 +1,10 @@
 // proceso de la creacion del posteo
 
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import FormPost from '../components/FormPost'
 import { db, auth } from '../firebase/config'
+import CamaraPost from '../components/CamaraPost'
 
  class NewPost extends Component {
     constructor(props){
@@ -23,6 +24,10 @@ import { db, auth } from '../firebase/config'
         
     }   
 
+    actualizarFoto(urlPic){
+      this.setState({foto:urlPic})
+    }
+
     nuevoPosteo({descripcion,foto,likes,comments}){
         db.collection('posts').add({
             owner: auth.currentUser.email ,
@@ -40,6 +45,13 @@ import { db, auth } from '../firebase/config'
   render() {
     return (
       <View>
+        {
+          this.state.foto == "" ?
+          <CamaraPost
+          actualizarFoto={(urlPic)=> this.actualizarFoto(urlPic)}
+          />
+          :
+          <View>
         <FormPost subirDescripcion={this.state.descripcion} actualizar={(text)=> this.actualizar(text)} />
         <TouchableOpacity onPress={()=> this.nuevoPosteo({
             descripcion: this.state.descripcion,
@@ -50,9 +62,16 @@ import { db, auth } from '../firebase/config'
         })}>
             <Text> Subir Posteo</Text>
         </TouchableOpacity>
+          </View>
+        }
+       
       </View>
     )
   }
 }
+
+/*const style = StyleSheet.create({
+  container:
+}) */
 
 export default NewPost

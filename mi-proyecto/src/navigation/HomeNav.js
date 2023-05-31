@@ -21,12 +21,6 @@ export default function HomeNav() {
         <Tab.Screen name='Feed' component={Feed} options={ 
           {tabBarIcon: ()=> <AntDesign name="home" size={24} color="violet" />}
         } />
-        <Tab.Screen name='Registro' component={Registro} options={ 
-          {tabBarIcon: ()=> <MaterialIcons name="app-registration" size={24} color="grey" />}
-        }  />
-        <Tab.Screen name='Login' component={Login} options={ 
-          {tabBarIcon: ()=> <AntDesign name="login" size={24} color="blue" />}
-        } />
 
         <Tab.Screen name='NewPost' component={NewPost} options={ 
           {tabBarIcon: ()=> <AntDesign name="plus" size={24} color="red" /> }
