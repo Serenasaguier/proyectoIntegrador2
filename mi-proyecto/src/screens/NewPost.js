@@ -44,7 +44,7 @@ import CamaraPost from '../components/CamaraPost'
 
   render() {
     return (
-      <View>
+      <View style={style.container}>
         {
           this.state.foto == "" ?
           <CamaraPost
@@ -70,8 +70,10 @@ import CamaraPost from '../components/CamaraPost'
   }
 }
 
-/*const style = StyleSheet.create({
-  container:
-}) */
+const style = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+}) 
 
 export default NewPost

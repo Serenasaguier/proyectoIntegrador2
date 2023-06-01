@@ -54,7 +54,7 @@ export default class CamaraPost extends Component {
 
   render() {
     return (
-      <View>
+      <View style={style.conteiner}>
           {this.state.mostrarCamara && this.state.tomoFoto === "" ?
           <>
           <Camera
@@ -99,5 +99,8 @@ export default class CamaraPost extends Component {
 const style = StyleSheet.create({
     camara: {
         height: 250
+    },
+    conteiner:{
+        flex:1
     }
 })
