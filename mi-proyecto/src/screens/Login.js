@@ -13,12 +13,7 @@ export default class Login extends Component {
     return (
       <View>
         <FormularioLogin navigation={this.props.navigation}/>
-        <Text>
-          No tenes cuenta?
-          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Registro')}>
-            <Text> Ir al Registro</Text>
-        </TouchableOpacity>
-        </Text>
+        
       </View>
     )
   }

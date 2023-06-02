@@ -42,7 +42,7 @@ loguearUsuario(mail, password){
         />
         { this.state.alert ?
             <View>
-                <Text> Hay un error en tu logueo</Text>
+                <Text style={styles.btnText} > Hay un error en tu logueo</Text>
             </View>
             :
             null
@@ -52,6 +52,12 @@ loguearUsuario(mail, password){
         onPress={()=> this.loguearUsuario(this.state.email, this.state.password)}>
             <Text style={styles.btnText}>Loguearme</Text>
         </TouchableOpacity>
+        <Text style={styles.btnText} >
+          No tenes cuenta?
+          <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Registro')}>
+            <Text> Ir al Registro</Text>
+        </TouchableOpacity>
+        </Text>
       </View>
 
     )
@@ -60,22 +66,24 @@ loguearUsuario(mail, password){
 
 const styles = StyleSheet.create({
     input:{
-        borderWidth:1,
-        brderColor:'#3d3d3d',
-        marginTop: 24,
-        height:20,
-        padding:5,
-        marginLeft:440,
-        width: 300,
-        color:'white'
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10,
+        width: '100%'
     },
     btn:{
-        marginTop: 32, 
-        backgroundColor:'black',
-        padding:10,
-        borderRadius:20,
-        width:170,
-        marginLeft:520,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(255,255,255)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'right',
+        width: '100%'
     },
     btnText:{
         textAlign: 'center',
@@ -87,7 +95,13 @@ const styles = StyleSheet.create({
             height:80
     },
     box:{
-        backgroundColor:'pink'
+        flex: 1,
+        backgroundColor: 'rgb(0,0,0)',
+        color: 'rgb(255,255,255)',
+        padding: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%'
     }
 })
 

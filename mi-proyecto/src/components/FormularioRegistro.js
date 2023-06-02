@@ -12,6 +12,7 @@ import Login from '../screens/Login'
         userName:'',
         miniBio:'',
         alert: false,
+        fotoPerfil: ''
     }
 }
 
@@ -25,8 +26,9 @@ registrarUsuario(mail,password,userName, miniBio){
             db.collection('users').add({
                 owner: auth.currentUser.email,
                 createdAt: Date.now(),
-                userName: userName,
-                miniBio: miniBio
+                userName: this.state.userName,
+                miniBio: this.state.miniBio,
+                fotoPerfil: this.state.fotoPerfil
             },
             this.props.navigation.navigate('Login'))
             .then(resp => console.log(resp))
@@ -45,11 +47,11 @@ loguearUsuario(email, password){
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
 
         { this.state.alert && (
             <View>
-                <Text> El campo debe completarse</Text>
+                <Text style={styles.btnText} > El campo debe completarse</Text>
             </View>
         )}
           
@@ -90,6 +92,12 @@ loguearUsuario(email, password){
         onPress={()=> this.registrarUsuario(this.state.inputMail, this.state.inputPassword, this.state.userName)}>
             <Text style={styles.btnText}>Registrar mi usuario</Text>
         </TouchableOpacity>
+        <Text style={styles.btnText}>
+          Ya tenes cuenta?
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+            <Text style={styles.btnText}> Ir al Login</Text>
+        </TouchableOpacity>
+        </Text>
       </View>
     )
   }
@@ -97,28 +105,38 @@ loguearUsuario(email, password){
 
 const styles = StyleSheet.create({
     input:{
-        borderWidth:1,
-        brderColor:'#3d3d3d',
-        marginTop: 24,
-        height:24,
-        padding:5,
+        color: 'rgb(0,0,0)',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(255,255,255)',
+        padding: 10,
+        margin: 10
     },
     btn:{
-        marginTop: 32, 
-        backgroundColor:'black',
-        padding:10,
-        borderRadius:20,
-        width:200
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(255,255,255)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'right'
     },
     btnText:{
         textAlign: 'center',
         fontWeight:'bold',
         color: 'white'
-
     },
      img: {
             height:80
-    }
+    },
+     container: {
+                flex: 1,
+                backgroundColor: 'rgb(0,0,0)',
+                color: 'rgb(255,255,255)',
+                padding: 15,
+                justifyContent: 'center',
+        }
 })
 
 export default FormularioRegistro
