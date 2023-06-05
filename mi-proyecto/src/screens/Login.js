@@ -13,7 +13,6 @@ export default class Login extends Component {
     return (
       <View>
         <FormularioLogin navigation={this.props.navigation}/>
-        
       </View>
     )
   }

@@ -10,12 +10,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Profile from '../screens/Profile'
 import NewPost from '../screens/NewPost'
 import Feed from '../screens/Feed'
-
+import { auth } from '../firebase/config'
 
 
 const Tab = createBottomTabNavigator()
 
 export default function HomeNav() {
+
+
   return (
     <Tab.Navigator>
         <Tab.Screen name='Feed' component={Feed} options={ 

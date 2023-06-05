@@ -33,7 +33,7 @@ export default class CamaraPost extends Component {
 
     rechazarTodo(){
         this.setState({
-            tomoFoto: false,
+            tomoFoto: '',
             mostrarCamara: true
         })
     }
@@ -55,42 +55,45 @@ export default class CamaraPost extends Component {
   render() {
     return (
       <View style={style.conteiner}>
-          {this.state.mostrarCamara && this.state.tomoFoto === "" ?
-          <>
-          <Camera
-          style ={style.camara}
-          type={Camera.Constants.Type.back}
-          ref={(metodoComp)=> this.metodoCam = metodoComp}
-          />
-          <TouchableOpacity onPress={()=> this.tomarFoto()}>
-              <Text>
-                  Tomar foto
-              </Text>
-          </TouchableOpacity>
-          </>
-          : this.state.mostrarCamara === false && this.state.tomoFoto !== "" ?
-          <>
-          <Image
-          source={{uri: this.state.tomoFoto}}
-          style
-          />
-          <View>
-              <TouchableOpacity onPress={()=> this.aceptarTodo()} >
-                  <Text>
-                      Aceptar foto
-                  </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=> this.rechazarTodo()}>
-                  <Text>
-                      Rechazar foto
-                  </Text>
-              </TouchableOpacity>
-          </View>
-          </>
-          :
-          <Text>No tienes permisos para usar la camara</Text>
-          }
-        
+          {
+            this.state.mostrarCamara && this.state.tomoFoto === "" 
+            ?
+                <>
+                <Camera
+                style ={style.camara}
+                type={Camera.Constants.Type.back}
+                ref={(metodoComp)=> this.metodoCam = metodoComp}
+                />
+                <TouchableOpacity onPress={()=> this.tomarFoto()}>
+                    <Text>
+                        Tomar foto
+                    </Text>
+                </TouchableOpacity>
+                </>
+            : 
+                this.state.mostrarCamara === false && this.state.tomoFoto !== "" 
+            ?
+                <>
+                    <Image
+                    source={{uri: this.state.tomoFoto}}
+                    style
+                    />
+                    <View>
+                        <TouchableOpacity onPress={()=> this.aceptarTodo()} >
+                            <Text>
+                                Aceptar foto
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=> this.rechazarTodo()}>
+                            <Text>
+                                Rechazar foto
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </> 
+            : 
+            <Text>No tenes permisos</Text>
+          } 
       </View>
     )
   }
