@@ -2,6 +2,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { auth, db } from '../firebase/config'
 import React, { Component } from 'react'
 import Login from '../screens/Login'
+import CamaraPost from './CamaraPost'
 
  class FormularioRegistro extends Component {
     constructor(props){
@@ -12,9 +13,14 @@ import Login from '../screens/Login'
         userName:'',
         miniBio:'',
         alert: false,
-        fotoPerfil: ''
+        foto: ''
     }
 }
+
+actualizarFoto(urlPic){
+    this.setState({foto:urlPic})
+  }
+
 
 registrarUsuario(mail,password,userName, miniBio){
 
@@ -83,10 +89,17 @@ loguearUsuario(email, password){
          onChangeText={(text)=> this.setState({miniBio:text})}
          value={this.state.miniBio}
         />
+
+          
+            <CamaraPost /*esto no esta bien */
+          actualizarFoto={(urlPic)=> this.actualizarFoto(urlPic)}
+          />
+
         <Image /* EL USUARIO TIENE QUE PONER SU IMAGEN */  source={{uri: 'https://thumbs.dreamstime.com/b/sentada-del-perrito-de-labrador-30817211.jpg'}}
         style={styles.img}
         resizeMode='contain'
         />
+
         <TouchableOpacity
         style={styles.btn}
         onPress={()=> this.registrarUsuario(this.state.inputMail, this.state.inputPassword, this.state.userName)}>

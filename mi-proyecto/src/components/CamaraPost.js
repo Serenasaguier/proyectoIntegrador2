@@ -64,8 +64,8 @@ export default class CamaraPost extends Component {
                 type={Camera.Constants.Type.back}
                 ref={(metodoComp)=> this.metodoCam = metodoComp}
                 />
-                <TouchableOpacity onPress={()=> this.tomarFoto()}>
-                    <Text>
+                <TouchableOpacity onPress={()=> this.tomarFoto()} style={style.btn}>
+                    <Text style={style.btnText} >
                         Tomar foto
                     </Text>
                 </TouchableOpacity>
@@ -76,23 +76,23 @@ export default class CamaraPost extends Component {
                 <>
                     <Image
                     source={{uri: this.state.tomoFoto}}
-                    style
+                    style={style.imagen}
                     />
                     <View>
-                        <TouchableOpacity onPress={()=> this.aceptarTodo()} >
-                            <Text>
+                        <TouchableOpacity onPress={()=> this.aceptarTodo()} style={style.btn} >
+                            <Text style={style.btnText}>
                                 Aceptar foto
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=> this.rechazarTodo()}>
-                            <Text>
+                        <TouchableOpacity onPress={()=> this.rechazarTodo()} style={style.btn}>
+                            <Text style={style.btnText}>
                                 Rechazar foto
                             </Text>
                         </TouchableOpacity>
                     </View>
                 </> 
             : 
-            <Text>No tenes permisos</Text>
+            <Text>No tenes permisos para usar la camara</Text>
           } 
       </View>
     )
@@ -105,5 +105,24 @@ const style = StyleSheet.create({
     },
     conteiner:{
         flex:1
+    },
+    imagen:{
+        flex: 1
+    },
+    btn:{
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'rgb(255,255,255)',
+        backgroundColor: 'rgb(0,0,0)',
+        margin: 10,
+        padding: 10,
+        textAlign: 'right',
+        width: '100%'
+    },
+    btnText:{
+        textAlign: 'center',
+        fontWeight:'bold',
+        color: 'white'
+
     }
 })

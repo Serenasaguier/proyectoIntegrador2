@@ -12,7 +12,7 @@ import React, { Component } from 'react'
 
   render() {
     return (
-      <View>
+      <View style={styles.btn}>
         <TextInput
         style={styles.input}
         keyboardType='default'
@@ -30,11 +30,15 @@ import React, { Component } from 'react'
 
 
 const styles= StyleSheet.create({
-    input:{
-        borderWidth:1,
-        borderColor: 'red',
-        padding:10
-    }
+  input:{
+    color: 'rgb(0,0,0)',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'rgb(0,0,0)',
+    backgroundColor: 'rgb(255,255,255)',
+    padding: 10,
+    margin: 10
+}
 })
 
 export default FormPost

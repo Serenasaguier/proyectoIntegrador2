@@ -53,14 +53,14 @@ import CamaraPost from '../components/CamaraPost'
           :
           <View>
         <FormPost subirDescripcion={this.state.descripcion} actualizar={(text)=> this.actualizar(text)} />
-        <TouchableOpacity onPress={()=> this.nuevoPosteo({
+        <TouchableOpacity style={style.btn} onPress={()=> this.nuevoPosteo({
             descripcion: this.state.descripcion,
             foto: this.state.foto,
             likes: this.state.likes,
             comments:this.state.comments
 
         })}>
-            <Text> Subir Posteo</Text>
+            <Text style={style.btnText}> Subir Posteo</Text>
         </TouchableOpacity>
           </View>
         }
@@ -73,7 +73,23 @@ import CamaraPost from '../components/CamaraPost'
 const style = StyleSheet.create({
   container: {
     flex: 1
-  }
+  },
+  btn:{
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'rgb(255,255,255)',
+    backgroundColor: 'rgb(0,0,0)',
+    margin: 10,
+    padding: 10,
+    textAlign: 'right',
+    width: '100%'
+},
+btnText:{
+    textAlign: 'center',
+    fontWeight:'bold',
+    color: 'white'
+
+}
 }) 
 
 export default NewPost
