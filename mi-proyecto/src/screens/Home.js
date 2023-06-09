@@ -1,39 +1,93 @@
-import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Image, FlatList } from 'react-native'
-import Card from '../components/Card'
+import React, { Component } from "react";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  Image,
+} from "react-native";
+// import logo from '../../assets/logo.png';
+import Card from "../components/Card";
+import { db } from "../firebase/config";
+import Posts from '../components/Posts'
 
-class Home extends Component{
-  constructor(props){
-      super(props)
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posteos: [],
+      loader: true,
+    };
   }
 
+  componentDidMount() {
+    console.log(db);
+    db.collection("posts")
+      .orderBy("createdAt", "desc")
+      .onSnapshot((docs) => {
+        let posts = [];
+        docs.forEach((doc) => {
+          console.log(doc.data(), "nashe");
+          posts.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        this.setState({
+          posteos: posts,
+          loader: false,
+        });
+      });
+  }
 
-  render(){
-      return(
-          <View>
-              <TouchableOpacity onPress={()=> this.props.navigation.navigate('Registro')}>
-                  <Text> Volver al registro</Text>
-              </TouchableOpacity>
-           </View>
-      )
+  render() {
+    return (
+      <View style={style.container}>
+        <Text> asd</Text>
+        <Posts data={this.state.posteos} />
+        {/* {this.state.loader === true ? (
+          <ActivityIndicator size="large" color="green" />
+        ) : (
+          <FlatList
+            style={style.flatList}
+            data={this.state.posteos}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <Card data={item} homeProps={this.props} />
+            )}
+          />
+        )} */}
+      </View>
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  button:{
-      backgroundColor: 'green',
-      borderRadius: 20,
-      borderWidth:2,
-      textAlign:'center',
-      padding:10
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: "rgb(0,0,0)",
+    color: "rgb(255,255,255)",
+    // justifyContent: "center",
+    alignItems: "center",
   },
-  textoBtn:{
-      color:'white'
+  image: {
+    textAlign: "center",
+    width: "40%",
+    height: undefined,
+    aspectRatio: 20 / 10,
+    margin: 10,
   },
-  img: {
-      height:350
-  }
- 
-})
+  title: {
+    fontWeight: 600,
+    color: "rgb(255,255,255)",
+    fontSize: 24,
+    textAlign: "center",
+  },
+  flatList: {
+    width: "100%",
+    height: "100%"
+  },
+});
 
-export default Home
+export default Home;
