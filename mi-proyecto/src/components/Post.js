@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React, { Component } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { db, auth } from "../firebase/config";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import firebase from "firebase";
 
 export default class Post extends Component {
@@ -11,6 +11,7 @@ export default class Post extends Component {
     this.state = {
       likeado: false,
       cantidadDeLikes: this.props.data.data.likes.length,
+      owner: false
     };
   }
 
@@ -50,7 +51,9 @@ export default class Post extends Component {
     db.collection("posts")
       .doc(this.props.data.id)
       .update({
-        likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email),
+        likes: firebase.firestore.FieldValue.arrayUnion(
+          auth.currentUser.email
+        ),
       })
       .then((resp) => {
         this.setState({
@@ -61,24 +64,25 @@ export default class Post extends Component {
       .catch((err) => console.log(err));
   }
 
-  //
-  botonLike() {
-    if (this.state.likeado === true) {
-      this.setState({
-        likeado: false,
-      });
-    } else {
-      this.setState({
-        likeado: true,
-      });
-      this.likes();
-    }
-  }
+  // borrar posteo
+  deletePost(){
+    db.collection("posts")
+    .doc(this.props.data.id)
+    .delete()
+    .then(() => {
+        console.log('Post eliminado');
+    }).catch((e) => {
+        console.log(e);
+    });
+}
 
   render() {
     return (
-      <View>
-        <Text>{this.props.data.data.descripcion}</Text>
+      <View style={style.cardContainer} >
+        <TouchableOpacity onPress={() => this.props.props.navigation.navigate('ProfileData', { email: this.props.data.data.owner })}>
+        <Text style={style.creador}>{this.props.data.data.owner}</Text>
+          </TouchableOpacity>
+        
         <Image
           style={style.image}
           source={{ uri: this.props.data.data.foto }}
@@ -93,6 +97,22 @@ export default class Post extends Component {
           </TouchableOpacity>
         )}
         <Text style={style.contenido}>{this.state.cantidadDeLikes} likes</Text>
+
+
+        <TouchableOpacity onPress={()=> this.props.props.navigation.navigate('FormComment', {id: this.props.data.id})}>
+          <FontAwesome5 style={style.btnComment} name="comment" size={24} color="black" />
+          <Text>Agregar comentario</Text>
+          </TouchableOpacity>
+         
+
+
+        <Text> Pie de foto : {this.props.data.data.descripcion}</Text>
+        {this.state.owner === true ? 
+        <TouchableOpacity onPress={() => this.deletePost()}>
+        <FontAwesome name="trash-o" size={24} color="red" />
+        </TouchableOpacity>
+        : null }
+        
       </View>
     );
   }
@@ -107,5 +127,12 @@ const style = StyleSheet.create({
   image: {
     width: '100%',
     height: 300
+},
+cardContainer: {
+  padding: 15,
+  borderBottomWidth: 1,
+  borderColor: 'rgb(180,180,180)',
+  borderStyle: 'solid',
+  width: '100vw'
 },
 });
