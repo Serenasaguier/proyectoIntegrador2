@@ -13,7 +13,7 @@ export default class FormComment extends Component {
 
     crearComment(comentario){
         db.collection('posts')
-        .doc(this.props.idPost)
+        .doc(this.props.idPosteo)
         .update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 owner: auth.currentUser.email,

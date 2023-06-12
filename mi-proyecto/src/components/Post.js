@@ -109,7 +109,7 @@ export default class Post extends Component {
         <Text> Pie de foto : {this.props.data.data.descripcion}</Text>
         {this.state.owner === true ? 
         <TouchableOpacity onPress={() => this.deletePost()}>
-        <FontAwesome name="trash-o" size={24} color="red" />
+        <FontAwesome name="trash-o" size={24} color="black" />
         </TouchableOpacity>
         : null }
         

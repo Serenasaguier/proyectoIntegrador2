@@ -1,6 +1,6 @@
 import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import FormComments from '../components/FormComments'
+import FormComment from '../components/FormComments'
 import { db } from '../firebase/config'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -43,7 +43,7 @@ class Comment extends Component {
           keyExtractor={item => item.createdAt.toString}
           renderItem={({ item }) => <Text>{item.comentario}</Text>}
         />
-        <FormComment idPost={this.props.route.params.id} />
+        <FormComment idPosteo={this.props.route.params.id} />
 
 
       </View>
