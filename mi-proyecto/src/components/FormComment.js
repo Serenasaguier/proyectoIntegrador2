@@ -1,4 +1,4 @@
-import { Text, View , TextInput, TouchableOpacity, StyleSheet} from 'react-native'
+import { Text, View , TextInput, TouchableOpacity, StyleSheet, FlatList} from 'react-native'
 import React, { Component } from 'react'
 import { db , auth} from '../firebase/config'
 import firebase from 'firebase'
@@ -7,13 +7,28 @@ export default class FormComment extends Component {
     constructor(props){
         super(props)
         this.state= {
-            comentario: ''
+            comentario: '',
+            alert: false
         }
     }
 
-    crearComment(comentario){
+    componentDidMount() {
         db.collection('posts')
-        .doc(this.props.idPosteo)
+          // no se pq no funciona .orderBy('createdAt', 'desc')
+          .doc(this.props.route.params.id)
+          .onSnapshot(doc => {
+            this.setState({
+              data: doc.data()
+            }, () => console.log(this.state.data))
+          })
+      }
+
+    crearComment(comentario){
+        if(comentario === ""){
+            this.setState({alert:true})
+        } else {
+        db.collection('posts')
+        .doc(this.props.idComments)
         .update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 owner: auth.currentUser.email,
@@ -22,12 +37,24 @@ export default class FormComment extends Component {
             })
         })
     }
+    }
 
   render() {
     return (
       <View style={styles.container}>
 
-
+        {this.state.comentario.length === 0 ?
+         <Text>Aún no hay comentarios.</Text>
+          :
+        <FlatList
+          style={styles.comentarios}
+          data={this.state.data.comments}
+          keyExtractor={item => item.createdAt.toString}
+          renderItem={({ item }) => <>
+            <Text>{item.owner}</Text> 
+             <Text>{item.comentario}</Text> 
+            </>} />
+            }    
         <TextInput
         keyboardType='default'
         style={styles.input}
@@ -39,6 +66,13 @@ export default class FormComment extends Component {
         onPress={()=> this.crearComment(this.state.comentario)}>
             <Text style={styles.btnSend}>Enviar comentario</Text>
         </TouchableOpacity>
+        
+  
+        {this.state.alert && (
+            <View>
+              <Text style={styles.btnText}> El campo esta vacio</Text>
+            </View>
+          )}
       </View>
     )
   }

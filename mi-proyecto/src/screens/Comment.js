@@ -12,16 +12,6 @@ class Comment extends Component {
     }
   }
 
-  componentDidMount() {
-    db.collection('posts')
-      .doc(this.props.route.params.id)
-      .onSnapshot(doc => {
-        this.setState({
-          data: doc.data()
-        }, () => console.log(this.state.data))
-      })
-  }
-
   render() {
 
     return (
@@ -32,20 +22,11 @@ class Comment extends Component {
         >
           <Text>
             <AntDesign name='arrowleft' size={24} color='black' />
-            back
+            BACK
           </Text>
         </TouchableOpacity>
         
-        <FlatList
-          style={styles.comentarios}
-          data={this.state.data.comments}
-          keyExtractor={item => item.createdAt.toString}
-          renderItem={({ item }) => <View>
-            <Text>{item.owner}</Text>  <Text>{item.comentario}</Text> 
-            </View>
-        } 
-        />
-        <FormComment navigation={this.props.route.params.id} />
+        <FormComment idComments={this.props.route.params.id} />
       </View>
     )
   }
@@ -55,7 +36,7 @@ const styles = StyleSheet.create({
   comentarios: {
     padding: 10,
     flexDirection: 'column',
-    flex: 10,
+    flex: 10
   },
   boton: {
     textAlign: 'center',
