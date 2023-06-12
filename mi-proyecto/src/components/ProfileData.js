@@ -1,8 +1,27 @@
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { auth } from '../firebase/config'
+import { getAuth, updatePassword } from "firebase/auth";
+
+
+const auth = getAuth();
+
+const user = auth.currentUser;
+const newPassword = getASecureRandomPassword();
+
 
 class ProfileData extends Component {
+
+  // DE FUNCIONALIDAD ELECTIVA PODEMOS HACER : Editar mi perfil: incorporar la funcionalidad para editar campos del perfíl del usuario. Los campos actualizables son: nombre de usuario, contraseña y mini bio. Deben tener en cuenta que la contraseña se modifica en Authentication y los demás datos en la colección 'users'. Puntaje: 1.
+
+    //  updatePassword(user, newPassword)
+    //  .then(() => {
+        // Update successful.
+    //  })
+    //  .catch((error) => {
+        // An error ocurred
+        // ...
+    //  });
 
     logout(){
         auth.signOut()
