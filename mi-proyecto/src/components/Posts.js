@@ -5,7 +5,7 @@ import Post from './Post'
 export default class Posts extends Component {
   render() {
     return (
-      <View>
+      <View style={style.container}>
         <FlatList
         style={style.flatList}
         data={this.props.data}
@@ -18,6 +18,9 @@ export default class Posts extends Component {
 }
 
 const style = StyleSheet.create({
+  container:{
+    flex:1
+  },
   flatList: {
       width: '100%'
   }

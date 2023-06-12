@@ -8,17 +8,21 @@ export default class FormComment extends Component {
         super(props)
         this.state= {
             comentario: '',
-            alert: false
+            alert: false,
+            data:[],
+            comments:[]
         }
     }
 
     componentDidMount() {
+        // no se pq no funciona .orderBy('createdAt', 'desc')
+        console.log(this.props)
         db.collection('posts')
-          // no se pq no funciona .orderBy('createdAt', 'desc')
-          .doc(this.props.route.params.id)
+          .doc(this.props.idComments)
           .onSnapshot(doc => {
             this.setState({
-              data: doc.data()
+              data: doc.data(),
+              comments: doc.data().comments
             }, () => console.log(this.state.data))
           })
       }
@@ -43,12 +47,13 @@ export default class FormComment extends Component {
     return (
       <View style={styles.container}>
 
-        {this.state.comentario.length === 0 ?
+        {
+        this.state.comments.length < 1 ?
          <Text>Aún no hay comentarios.</Text>
           :
         <FlatList
           style={styles.comentarios}
-          data={this.state.data.comments}
+          data={this.state.comments}
           keyExtractor={item => item.createdAt.toString}
           renderItem={({ item }) => <>
             <Text>{item.owner}</Text> 
