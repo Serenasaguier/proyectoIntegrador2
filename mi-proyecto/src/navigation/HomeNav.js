@@ -1,17 +1,11 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Home from '../screens/Home'
-import Registro from '../screens/Registro'
-import Login from '../screens/Login'
-import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
 import Profile from '../screens/Profile'
 import NewPost from '../screens/NewPost'
 import Feed from '../screens/Feed'
-import { auth } from '../firebase/config'
 import Comment from '../screens/Comment'
+import StackNav from './StackNav';
 
 
 const Tab = createBottomTabNavigator()
@@ -33,9 +27,6 @@ export default function HomeNav() {
           {tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
         }  />
 
-        <Tab.Screen name='Comment' component={Comment} options={ 
-          {tabBarIcon: ()=> <AntDesign name="Comment" size={24} color="orange" />}
-        }  />
 
     </Tab.Navigator>
   )
