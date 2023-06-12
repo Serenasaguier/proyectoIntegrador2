@@ -40,7 +40,10 @@ class Comment extends Component {
           style={styles.comentarios}
           data={this.state.data.comments}
           keyExtractor={item => item.createdAt.toString}
-          renderItem={({ item }) => <Text>{item.comentario}</Text>}
+          renderItem={({ item }) => <View>
+            <Text>{item.owner}</Text>  <Text>{item.comentario}</Text> 
+            </View>
+        } 
         />
         <FormComment navigation={this.props.route.params.id} />
       </View>
