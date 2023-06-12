@@ -1,65 +1,131 @@
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
-import FormComment from '../components/FormComment'
-import { db } from '../firebase/config'
-import { AntDesign } from '@expo/vector-icons';
+import {React, Component} from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, TextInput } from "react-native";
+import { db, auth } from '../firebase/config';
+import firebase from "firebase";
+import { FontAwesome, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+// import CommentsCard from "../components/CommentsCard";
 
-class Comment extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: {}
+
+class Comment extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            props: props,
+            comentarios: [],
+            comentario: ''
+        }
+    };
+
+
+    componentDidMount() {
+        db.collection('posts').where(firebase.firestore.FieldPath.documentId(), '==', this.props.route.params.id).onSnapshot(
+            docs => {
+                docs.forEach(doc => {
+                    this.setState({
+                        comentarios: doc.data().comments.reverse()
+                    })
+                });
+            }
+        )
+
     }
-  }
 
-  render() {
+    comment(){
+        this.setState({
+            comentario: ''
+        })
+        db.collection('posts')
+        .doc(this.props.route.params.id)
+        .update({
+            comments: firebase.firestore.FieldValue.arrayUnion({
+                createdAt: Date.now(),
+                owner: auth.currentUser.email,
+                content: this.state.comentario
+            })
+        })
+        .then(()=> this.setState({
+            comentario: ''
+        }))
+        .catch((e)=> console.log(e))
+    }
 
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.flecha}
-          onPress={() => this.props.navigation.navigate('Feed')}
-        >
-          <Text>
-            <AntDesign name='arrowleft' size={24} color='black' />
-            BACK
-          </Text>
-        </TouchableOpacity>
-        
-        <FormComment idComments={this.props.route.params.id} />
-      </View>
-    )
-  }
+    render(){
+        return(
+            <View style={style.container}>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNav')}>
+                    <AntDesign name="back" size={32} color="white" style={style.back}/>
+                </TouchableOpacity>
+                {console.log(this.state.comentarios, 'coments')}
+                {this.state.comentarios.length === 0 ?
+                 <Text style={style.noComments}>Aún no hay comentarios. Se el primero en comentar!</Text>
+                :
+                <FlatList
+
+                    data={this.state.comentarios}
+                    renderItem={({ item }) => <Text style={{color: 'white'}}> {item.content} BY: {item.owner} </Text>}
+                /> 
+                }
+                <View style={style.flex}>
+                    <TextInput
+                        style={style.input}
+                        keyboardType='default'
+                        placeholder='Comentá acá...'
+                        onChangeText={text => this.setState({ comentario: text, error: '' })}
+                        value={this.state.comentario}
+                    />
+                    <TouchableOpacity onPress={() => this.comment()}>
+                        <MaterialCommunityIcons name="send" size={24} color="#0d9900" style={style.btnSend} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
 }
 
-const styles = StyleSheet.create({
-  comentarios: {
-    padding: 10,
-    flexDirection: 'column',
-    flex: 10
-  },
-  boton: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  btn: {
-    marginTop: 32,
-    backgroundColor: '#54d0e0',
-    padding: 10,
-    borderRadius: 20
-  },
-  flecha: {
-    alignItems: 'start'
-  },    
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    color: 'rgb(255,255,255)',
-    padding: 15,
-    justifyContent: 'center',
-    textAlign: 'center',
-}
+const style = StyleSheet.create({
+    container: {
+        flex: 2,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgb(0,0,0)'
+    },
+    back:{
+        marginBottom: 15,
+        marginTop: 10,
+        marginLeft: 10
+    },
+    noComments: {
+        color: 'rgb(255,255,255)',
+        fontSize: 16,
+        margin: 10
+    },
+    whiteText: {
+        color: 'rgb(255,255,255)'
+    },
+    input: {
+        backgroundColor: 'rgb(0,0,0)',
+        padding: 10,
+        fontSize: 16,
+        marginVertical: 10,
+        color: 'rgb(255,255,255)',
+        height: 50,
+        bottom: 0,
+        width: '85vw'
+    },
+    flex: {
+        flexDirection: 'row',
+        flex: 2,
+        position: 'absolute',
+        bottom: 0,
+        alignItems: 'end',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    btnSend: {
+        width: '10vw',
+        height: 50
+    }
 })
 
-export default Comment
+
+export default Comment;

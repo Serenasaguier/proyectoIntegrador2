@@ -1,5 +1,5 @@
-import { Text, View, ActivityIndicator, FlatList, StyleSheet } from 'react-native'
-import React, { Component } from 'react'
+import { Text, View, StyleSheet} from 'react-native'
+import React, { Component} from 'react'
 import { db } from '../firebase/config'
 import Posts from '../components/Posts'
 
@@ -8,13 +8,12 @@ export default class Feed extends Component {
     constructor(props){
         super(props)
         this.state={
-            posts:[],
-            loader: true
+            posts:[]
         }
     }
 
     componentDidMount(){
-        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(docs => {
+        db.collection('posts').onSnapshot(docs => {
             let arrayDocs = []
             docs.forEach(doc => arrayDocs.push({
                 id: doc.id,
@@ -24,8 +23,7 @@ export default class Feed extends Component {
             console.log(arrayDocs)
 
             this.setState({
-                posts: arrayDocs,
-                loader: false
+                posts: arrayDocs
             })
 
         })
@@ -33,48 +31,16 @@ export default class Feed extends Component {
 
   render() {
     return (
-      <View style={style.container}>
-
-        {this.state.loader === true ?
-        <ActivityIndicator size='large' color='green' />
-        :
-        /*<FlatList
-            style={style.flatList}
-            data={this.state.posts}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) =>*/ 
-            <Posts data={this.state.posts} navigation={this.props.navigation} />
-      /*  }
-        />*/
-        
-      }
-        
+      <View style={style.contengo}>
+        <Posts data={this.state.posts} navigation={this.props.navigation}/>
       </View>
     )
   }
 }
-
 const style = StyleSheet.create({
-  container: {
-      flex: 1,
-      color: 'rgb(255,255,255)',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  image: {
-      textAlign: 'center',
-      width: '40%',
-      height: undefined,
-      aspectRatio: 20 / 10,
-      margin: 10
-  },
-  title: {
-      fontWeight: 600,
-      color: 'rgb(255,255,255)',
-      fontSize: 24,
-      textAlign: 'center'
-  },
-  flatList: {
-      width: '100%'
+  contengo: {
+      margin: 'auto',
+      width: '30%',
+      overflow: 'auto'
   }
 })
