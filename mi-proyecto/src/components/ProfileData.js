@@ -4,10 +4,10 @@ import { auth } from '../firebase/config'
 import { getAuth, updatePassword } from "firebase/auth";
 
 
-const auth = getAuth();
+// const auth = getAuth();
 
-const user = auth.currentUser;
-const newPassword = getASecureRandomPassword();
+// const user = auth.currentUser;
+// const newPassword = getASecureRandomPassword();
 
 
 class ProfileData extends Component {
