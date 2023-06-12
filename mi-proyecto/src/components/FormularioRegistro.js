@@ -22,6 +22,14 @@ import {
         fotoPerfil: "",
       };
     }
+
+    componentDidMount(){
+      auth.onAuthStateChanged(user => {
+        if(user){
+          this.props.navigation.navigate('HomeNav')
+        }
+      })
+    }
   
     registrarUsuario(mail, password, userName, miniBio) {
       if (mail === "" || password === "" || userName === "") {

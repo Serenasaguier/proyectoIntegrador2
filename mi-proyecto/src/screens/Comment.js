@@ -28,7 +28,7 @@ class Comment extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.flecha}
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={() => this.props.navigation.navigate('HomeNav')}
         >
           <Text>
             <AntDesign name='arrowleft' size={24} color='black' />

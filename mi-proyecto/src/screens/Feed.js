@@ -38,12 +38,14 @@ export default class Feed extends Component {
         {this.state.loader === true ?
         <ActivityIndicator size='large' color='green' />
         :
-        <FlatList
+        /*<FlatList
             style={style.flatList}
             data={this.state.posts}
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <Posts data={this.state.posts} props={this.props} />}
-        />
+            renderItem={({ item }) =>*/ 
+            <Posts data={this.state.posts} navigation={this.props.navigation} />
+      /*  }
+        />*/
         
       }
         

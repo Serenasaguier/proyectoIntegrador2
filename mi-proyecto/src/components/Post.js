@@ -76,10 +76,11 @@ export default class Post extends Component {
     });
 }
 
-  render() {
+  render() {  
+    console.log(this.props)
     return (
       <View style={style.cardContainer} >
-        <TouchableOpacity onPress={() => this.props.props.navigation.navigate('ProfileData', { email: this.props.data.data.owner })}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', { email: this.props.data.data.owner })}>
         <Text style={style.creador}>{this.props.data.data.owner}</Text>
           </TouchableOpacity>
         
@@ -99,7 +100,7 @@ export default class Post extends Component {
         <Text style={style.contenido}>{this.state.cantidadDeLikes} likes</Text>
 
 
-        <TouchableOpacity onPress={()=> this.props.props.navigation.navigate('FormComment', {id: this.props.data.id})}>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comment', {id: this.props.data.id})}>
           <FontAwesome5 style={style.btnComment} name="comment" size={24} color="black" />
           <Text>Agregar comentario</Text>
           </TouchableOpacity>

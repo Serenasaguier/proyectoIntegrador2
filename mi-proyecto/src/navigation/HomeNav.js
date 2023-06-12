@@ -11,6 +11,7 @@ import Profile from '../screens/Profile'
 import NewPost from '../screens/NewPost'
 import Feed from '../screens/Feed'
 import { auth } from '../firebase/config'
+import Comment from '../screens/Comment'
 
 
 const Tab = createBottomTabNavigator()
@@ -30,6 +31,10 @@ export default function HomeNav() {
 
         <Tab.Screen name='Profile' component={Profile} options={ 
           {tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
+        }  />
+
+        <Tab.Screen name='Comment' component={Comment} options={ 
+          {tabBarIcon: ()=> <AntDesign name="Comment" size={24} color="orange" />}
         }  />
 
     </Tab.Navigator>
