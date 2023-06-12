@@ -1,6 +1,6 @@
 import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import FormComment from '../components/FormComments'
+import FormComment from '../components/FormComment'
 import { db } from '../firebase/config'
 import { AntDesign } from '@expo/vector-icons';
 
