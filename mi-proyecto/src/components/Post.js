@@ -102,7 +102,7 @@ export default class Post extends Component {
 
         <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comment', {id: this.props.data.id})}>
           <FontAwesome5 style={style.btnComment} name="comment" size={24} color="black" />
-          <Text>Agregar comentario</Text>
+          <Text>{this.props.data.data.comments.length} comentarios</Text>
           </TouchableOpacity>
          
 

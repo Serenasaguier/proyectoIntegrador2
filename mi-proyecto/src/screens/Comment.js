@@ -28,24 +28,21 @@ class Comment extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.flecha}
-          onPress={() => this.props.navigation.navigate('HomeNav')}
+          onPress={() => this.props.navigation.navigate('Feed')}
         >
           <Text>
             <AntDesign name='arrowleft' size={24} color='black' />
-            HOME
+            back
           </Text>
         </TouchableOpacity>
         
-
         <FlatList
           style={styles.comentarios}
           data={this.state.data.comments}
           keyExtractor={item => item.createdAt.toString}
           renderItem={({ item }) => <Text>{item.comentario}</Text>}
         />
-        <FormComment idPosteo={this.props.route.params.id} />
-
-
+        <FormComment navigation={this.props.route.params.id} />
       </View>
     )
   }

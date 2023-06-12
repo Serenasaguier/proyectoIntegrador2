@@ -13,7 +13,8 @@ import CamaraPost from '../components/CamaraPost'
             descripcion: '',
             foto: '',
             likes: [],
-            comments: []
+            comments: [],
+            loader: false
         }
     }
 
@@ -45,6 +46,7 @@ import CamaraPost from '../components/CamaraPost'
   render() {
     return (
       <View style={style.container}>
+        
         {
           this.state.foto == "" ?
           <CamaraPost

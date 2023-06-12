@@ -26,6 +26,11 @@ export default class FormComment extends Component {
   render() {
     return (
       <View style={styles.container}>
+
+           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', { email: this.props.data.data.owner })}>
+        <Text >{this.props.data.data.owner}</Text>
+          </TouchableOpacity>
+          <Text>{this.props.props.comentario}</Text>
         <TextInput
         keyboardType='default'
         style={styles.input}
@@ -33,10 +38,8 @@ export default class FormComment extends Component {
         value= {this.state.comentario}
         placeholder='Envia tu comentario'
         />
-
         <TouchableOpacity 
-        onPress={()=> this.crearComment(this.state.comentario)}
-        >
+        onPress={()=> this.crearComment(this.state.comentario)}>
             <Text style={styles.btnSend}>Enviar comentario</Text>
         </TouchableOpacity>
       </View>

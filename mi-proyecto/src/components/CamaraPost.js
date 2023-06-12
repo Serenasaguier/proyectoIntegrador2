@@ -9,7 +9,8 @@ export default class CamaraPost extends Component {
         super(props)
         this.state = {
             mostrarCamara:false,
-            tomoFoto: ''
+            tomoFoto: '',
+            loader: false
         }
 
         this.metodoCam = null
