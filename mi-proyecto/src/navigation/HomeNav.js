@@ -27,9 +27,7 @@ export default function HomeNav() {
           {tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
         }  />
 
-      <Tab.Screen name='Comment' component={Comment} options={ 
-          {tabBarIcon: ()=> <AntDesign name="word" size={24} color="orange" />}
-        }  />
+      
     </Tab.Navigator>
   )
 }
