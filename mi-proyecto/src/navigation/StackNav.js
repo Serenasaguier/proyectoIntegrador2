@@ -5,8 +5,7 @@ import Comment from '../screens/Comment';
 
 const Stack = createNativeStackNavigator()
 
-export default class StackNav extends Component {
-  render() {
+ function StackNav () {
     return (
       <Stack.Navigator>
         <Stack.Screen name='Feed' component={Feed} />
@@ -14,4 +13,6 @@ export default class StackNav extends Component {
       </Stack.Navigator>
     )
   }
-}
+
+
+export default StackNav

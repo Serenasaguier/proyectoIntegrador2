@@ -20,9 +20,7 @@ export default class Feed extends Component {
                 id: doc.id,
                 data:doc.data()
             }))
-
             console.log(arrayDocs)
-
             this.setState({
                 posts: arrayDocs,
                 loader: false
@@ -38,17 +36,8 @@ export default class Feed extends Component {
         {this.state.loader === true ?
         <ActivityIndicator size='large' color='green' />
         :
-        /*<FlatList
-            style={style.flatList}
-            data={this.state.posts}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) =>*/ 
             <Posts data={this.state.posts} navigation={this.props.navigation} />
-      /*  }
-        />*/
-        
       }
-        
       </View>
     )
   }

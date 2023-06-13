@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { AntDesign } from '@expo/vector-icons'; 
 import Profile from '../screens/Profile'
 import NewPost from '../screens/NewPost'
-import Feed from '../screens/Feed'
-import Comment from '../screens/Comment'
 import StackNav from './StackNav';
+import Feed from '../screens/Feed';
+import Comment from '../screens/Comment';
 
 
 const Tab = createBottomTabNavigator()
@@ -27,7 +27,9 @@ export default function HomeNav() {
           {tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
         }  />
 
-
+      <Tab.Screen name='Comment' component={Comment} options={ 
+          {tabBarIcon: ()=> <AntDesign name="word" size={24} color="orange" />}
+        }  />
     </Tab.Navigator>
   )
 }

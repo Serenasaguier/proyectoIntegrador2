@@ -1,8 +1,6 @@
 import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import FormComment from '../components/FormComment'
-import { db } from '../firebase/config'
-import { AntDesign } from '@expo/vector-icons';
 
 class Comment extends Component {
   constructor(props) {
@@ -21,7 +19,6 @@ class Comment extends Component {
           onPress={() => this.props.navigation.navigate('Feed')}
         >
           <Text>
-            <AntDesign name='arrowleft' size={24} color='black' />
             BACK
           </Text>
         </TouchableOpacity>

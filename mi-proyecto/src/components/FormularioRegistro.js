@@ -99,13 +99,7 @@ import {
             onChangeText={(text) => this.setState({ miniBio: text })}
             value={this.state.miniBio}
           />
-          <Image
-            /* EL USUARIO TIENE QUE PONER SU IMAGEN */ source={{
-              uri: "https://thumbs.dreamstime.com/b/sentada-del-perrito-de-labrador-30817211.jpg",
-            }}
-            style={styles.img}
-            resizeMode="contain"
-          />
+
           <TouchableOpacity
             style={styles.btn}
             onPress={() =>
