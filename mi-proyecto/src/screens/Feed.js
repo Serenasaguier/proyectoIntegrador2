@@ -1,5 +1,5 @@
-import { Text, View, ActivityIndicator, FlatList, StyleSheet } from 'react-native'
-import React, { Component } from 'react'
+import { Text, View, StyleSheet, ActivityIndicator} from 'react-native'
+import React, { Component} from 'react'
 import { db } from '../firebase/config'
 import Posts from '../components/Posts'
 
@@ -14,7 +14,9 @@ export default class Feed extends Component {
     }
 
     componentDidMount(){
-        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(docs => {
+      db.collection('posts')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot(docs => {
             let arrayDocs = []
             docs.forEach(doc => arrayDocs.push({
                 id: doc.id,
@@ -33,37 +35,36 @@ export default class Feed extends Component {
     return (
       <View style={style.container}>
 
-        {this.state.loader === true ?
-        <ActivityIndicator size='large' color='green' />
-        :
-            <Posts data={this.state.posts} navigation={this.props.navigation} />
-      }
+      {this.state.loader === true ?
+      <ActivityIndicator size='large' color='green' />
+      :
+          <Posts data={this.state.posts} navigation={this.props.navigation} />
+    }
       </View>
     )
   }
 }
-
-const style = StyleSheet.create({
+const style = StyleSheet.create({ 
   container: {
-      flex: 1,
-      color: 'rgb(255,255,255)',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  image: {
-      textAlign: 'center',
-      width: '40%',
-      height: undefined,
-      aspectRatio: 20 / 10,
-      margin: 10
-  },
-  title: {
-      fontWeight: 600,
-      color: 'rgb(255,255,255)',
-      fontSize: 24,
-      textAlign: 'center'
-  },
-  flatList: {
-      width: '100%'
-  }
+    flex: 1,
+    color: 'rgb(255,255,255)',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+},image: {
+    textAlign: 'center',
+    width: '40%',
+    height: undefined,
+    aspectRatio: 20 / 10,
+    margin: 10
+
+},title: {
+    fontWeight: 600,
+    color: 'rgb(255,255,255)',
+    fontSize: 24,
+    textAlign: 'center'
+
+},flatList: {
+    width: '100%'
+}
 })

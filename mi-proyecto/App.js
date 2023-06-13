@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeNav from './src/navigation/HomeNav';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home'
-
+import Comment from './src/screens/Comment';
 const Stack = createNativeStackNavigator()
 
 export default function App() { 
