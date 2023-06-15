@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgb(0,0,0)",
     backgroundColor: "rgb(255,255,255)",
-    padding: 10,
+    padding: 2,
     margin: 10,
   },
   btn: {
@@ -141,14 +141,17 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(0,0,0)",
     margin: 10,
     textAlign: "right",
-    borderRadius: 10
+    borderRadius: 10,
+    borderColor: 'black'
+    
   },
   btnText: {
     textAlign: "center",
     fontWeight: "bold",
     color: "white",
     backgroundColor: "rgb(165,103,205)",
-    borderRadius: 10
+    borderRadius: 10,
+    
   },
   img: {
     height: 80,

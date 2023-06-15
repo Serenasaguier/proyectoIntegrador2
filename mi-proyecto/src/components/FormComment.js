@@ -85,13 +85,14 @@ export default class FormComment extends Component {
 
 const styles = StyleSheet.create({
     input:{
-        color: 'rgb(0,0,0)',
-        borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: 'rgb(0,0,0)',
-        backgroundColor: 'rgb(255,255,255)',
-        padding: 10,
-        margin: 10
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'rgb(165,103,205)',
+        borderRadius: 8,
+        padding: 20,
+        fontSize: 16,
+        marginVertical: 15
     },
     container: {
         flex: 1,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     btnSend:{
         borderStyle: 'solid',
         borderWidth: 1,
-        backgroundColor: 'rgb(0,0,0)',
+        backgroundColor: 'rgb(165,103,205)',
         margin: 10,
         padding: 10,
         textAlign: 'center',

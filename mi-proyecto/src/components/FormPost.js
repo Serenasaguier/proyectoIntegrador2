@@ -12,7 +12,7 @@ import React, { Component } from 'react'
 
   render() {
     return (
-      <View style={styles.btn}>
+      <View style={styles.conteiner}>
         <TextInput
         style={styles.input}
         keyboardType='default'
@@ -31,13 +31,21 @@ import React, { Component } from 'react'
 
 const styles= StyleSheet.create({
   input:{
-    color: 'rgb(0,0,0)',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'rgb(0,0,0)',
-    backgroundColor: 'rgb(255,255,255)',
-    padding: 10,
-    margin: 10
+        borderWidth: 1,
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 8,
+        padding: 20,
+        fontSize: 16,
+        marginVertical: 15
+},
+conteiner:{
+        flex: 1,
+        backgroundColor: 'white',
+        color: 'rgb(255,255,255)',
+        padding: 15,
+        justifyContent: 'center'
 }
 })
 

@@ -26,6 +26,13 @@ export default class Post extends Component {
         likeado: true,
       });
     }
+
+    if (auth.currentUser.email === this.props.data.data.owner){
+      this.setState({
+          owner: true
+      })
+  }
+
   }
 
   //sacar like
@@ -79,6 +86,7 @@ export default class Post extends Component {
   render() {  
     console.log(this.props)
     return (
+      <View style={style.contenido}>
       <View style={style.cardContainer} >
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', { email: this.props.data.data.owner })}>
         <Text style={style.creador}>{this.props.data.data.owner}</Text>
@@ -101,13 +109,11 @@ export default class Post extends Component {
 
 
         <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comment', {id: this.props.data.id})}>
-          <FontAwesome5 style={style.btnComment} name="comment" size={24} color="black" />
-          <Text>{this.props.data.data.comments.length} comentarios</Text>
+          
+        <FontAwesome5 style={style.btnComment} name="comment" size={24} color="black" /> <Text style={style.comment} >{this.props.data.data.comments.length} comentarios</Text>
           </TouchableOpacity>
          
-
-
-        <Text> Pie de foto : {this.props.data.data.descripcion}</Text>
+        <Text style={style.descripcion} > Pie de foto : {this.props.data.data.descripcion}</Text>
         
         {this.state.owner === true ? 
         <TouchableOpacity onPress={() => this.deletePost()}>
@@ -116,32 +122,31 @@ export default class Post extends Component {
         : null }
         
       </View>
+      </View>
     );
   }
 }
 
 const style = StyleSheet.create({
   contenido: {
-    fontSize: 16,
-    marginTop: 3,
+    marginVertical: 15,
     flex: 1,
-    color: 'rgb(255,255,255)',
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   image: {
-    textAlign: 'center',
-    width: '40%',
-    height: undefined,
-    aspectRatio: 20 / 10,
-    margin: 10
+    height: 300,
+    width: 300,
+    borderRadius: 5, 
+    borderColor:'rgb(177,141,201)'
 },
 cardContainer: {
-  padding: 15,
-  borderBottomWidth: 1,
-  borderColor: 'rgb(180,180,180)',
-  borderStyle: 'solid',
-  width: '100vw'
+    margin: 7,
+    padding: 50,
+    borderWidth: 3,
+    borderRadius: 5,
+    borderColor: 'rgb(177,141,201)',
+    backgroundColor: 'rgb(182,157,198)'
 },title: {
     fontWeight: 600,
     color: 'rgb(255,255,255)',
@@ -152,6 +157,25 @@ cardContainer: {
     width: '100%'
 },
 like: {
-  color: 'black'
+  color: 'red'
+},
+creador:{
+  padding: 10,
+    margin: 10,
+    fontWeight: 'bold', 
+    fontSize: 15,
+    backgroundColor: 'rgb(165,103,205)',
+    borderRadius:10,
+    color: '#10254E'
+},
+descripcion:{
+  padding: 10,
+  fontSize: 18,
+  margin: 10,
+  backgroundColor: 'rgb(209,181,227)',
+  borderColor: '#C2C2C3'
+},
+comment:{
+  color:'black'
 }
 });

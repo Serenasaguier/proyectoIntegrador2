@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   btnText:{
       textAlign: 'center',
       fontWeight:'bold',
-      color: 'white'
+      color: 'white',
+      backgroundColor: "rgb(165,103,205)",
 
   },
    img: {

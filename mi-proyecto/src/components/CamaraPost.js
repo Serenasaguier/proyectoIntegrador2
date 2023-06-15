@@ -116,14 +116,15 @@ const style = StyleSheet.create({
         borderColor: 'rgb(255,255,255)',
         backgroundColor: 'rgb(0,0,0)',
         margin: 10,
-        padding: 10,
+        padding: 2,
         textAlign: 'right',
         width: '100%'
     },
     btnText:{
         textAlign: 'center',
         fontWeight:'bold',
-        color: 'white'
+        color: 'white',
+        backgroundColor: 'rgb(165,103,205)'
 
     }
 })
