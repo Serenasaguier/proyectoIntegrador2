@@ -25,7 +25,7 @@ loguearUsuario(mail, password){
 
   render() {
     return (
-      <View style={styles.box}>
+      <View style={styles.container}>
         <TextInput
         style={styles.input}
         placeholder='Email'
@@ -52,12 +52,11 @@ loguearUsuario(mail, password){
         onPress={()=> this.loguearUsuario(this.state.email, this.state.password)}>
             <Text style={styles.btnText}>Loguearme</Text>
         </TouchableOpacity>
-        <Text style={styles.btnText} >
-          No tenes cuenta?
-          <TouchableOpacity  onPress={()=> this.props.navigation.navigate('Registro')}>
-            <Text> Ir al Registro</Text>
+
+        <TouchableOpacity style={styles.btn}  onPress={()=> this.props.navigation.navigate('Registro')}>
+        <Text style={styles.btnText} >No tenes cuenta? Ir al Registro </Text>
         </TouchableOpacity>
-        </Text>
+       
       </View>
 
     )
@@ -75,33 +74,30 @@ const styles = StyleSheet.create({
         margin: 10,
         width: '100%'
     },
-    btn:{
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'rgb(255,255,255)',
-        backgroundColor: 'rgb(0,0,0)',
+    btn: {
+        borderWidth: 4,
+        backgroundColor: "rgb(0,0,0)",
         margin: 10,
-        padding: 10,
-        textAlign: 'right',
-        width: '100%'
+        textAlign: "right",
+        borderRadius: 10
     },
-    btnText:{
-        textAlign: 'center',
-        fontWeight:'bold',
-        color: 'white'
-
+    btnText: {
+        textAlign: "center",
+        fontWeight: "bold",
+        color: "white",
+        backgroundColor: "rgb(165,103,205)",
+        borderRadius: 10
     },
      img: {
             height:80
     },
-    box:{
+    container: {
         flex: 1,
-        backgroundColor: 'rgb(0,0,0)',
-        color: 'rgb(255,255,255)',
+        backgroundColor: "rgb(178,137,205)",
+        color: 'rgb(255,87,51)',
         padding: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%'
-    }
+        justifyContent: "center",
+    
+      }
 })
 

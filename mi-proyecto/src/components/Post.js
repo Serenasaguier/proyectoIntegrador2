@@ -97,7 +97,7 @@ export default class Post extends Component {
             <FontAwesome name="heart-o" size={24} color="red" />
           </TouchableOpacity>
         )}
-        <Text style={style.contenido}>{this.state.cantidadDeLikes} likes</Text>
+        <Text style={style.like}>{this.state.cantidadDeLikes} likes</Text>
 
 
         <TouchableOpacity onPress={()=> this.props.navigation.navigate('Comment', {id: this.props.data.id})}>
@@ -108,6 +108,7 @@ export default class Post extends Component {
 
 
         <Text> Pie de foto : {this.props.data.data.descripcion}</Text>
+        
         {this.state.owner === true ? 
         <TouchableOpacity onPress={() => this.deletePost()}>
         <FontAwesome name="trash-o" size={24} color="black" />
@@ -122,12 +123,18 @@ export default class Post extends Component {
 const style = StyleSheet.create({
   contenido: {
     fontSize: 16,
-    color: "black",
     marginTop: 3,
+    flex: 1,
+    color: 'rgb(255,255,255)',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
-    width: '100%',
-    height: 300
+    textAlign: 'center',
+    width: '40%',
+    height: undefined,
+    aspectRatio: 20 / 10,
+    margin: 10
 },
 cardContainer: {
   padding: 15,
@@ -135,5 +142,16 @@ cardContainer: {
   borderColor: 'rgb(180,180,180)',
   borderStyle: 'solid',
   width: '100vw'
+},title: {
+    fontWeight: 600,
+    color: 'rgb(255,255,255)',
+    fontSize: 24,
+    textAlign: 'center'
+
+},flatList: {
+    width: '100%'
 },
+like: {
+  color: 'black'
+}
 });
