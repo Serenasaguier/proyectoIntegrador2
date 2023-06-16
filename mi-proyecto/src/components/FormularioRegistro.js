@@ -23,13 +23,13 @@ class FormularioRegistro extends Component {
     };
   }
 
-  componentDidMount(){
+  /* componentDidMount(){
     auth.onAuthStateChanged(user => {
       if(user){
         this.props.navigation.navigate('HomeNav')
       }
     })
-  }
+  } */
 
   registrarUsuario(mail, password, userName, miniBio) {
     if (mail === "" || password === "" || userName === "") {
@@ -37,19 +37,19 @@ class FormularioRegistro extends Component {
     } else
       auth
         .createUserWithEmailAndPassword(mail, password)
-        .then((data) => {
+        .then(data => {
           db.collection("users")
-            .add(
-              {
+            .add({
                 owner: auth.currentUser.email,
                 createdAt: Date.now(),
                 userName: this.state.userName,
                 miniBio: this.state.miniBio,
-                fotoPerfil: this.state.fotoPerfil,
-              },
-              this.props.navigation.navigate("Login")
-            )
-            .then((resp) => console.log(resp))
+                fotoPerfil: '',
+              })
+            .then(resp =>{ 
+              console.log(resp)
+            this.props.navigation.navigate("MasInfoUser", {docId: resp.id})
+          })
             .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));

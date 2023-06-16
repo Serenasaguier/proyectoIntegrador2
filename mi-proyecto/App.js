@@ -7,6 +7,8 @@ import Login from './src/screens/Login';
 import Home from './src/screens/Home'
 import Comment from './src/screens/Comment';
 import ProfileAmigo from './src/screens/ProfileAmigo';
+import MasInfoUser from './src/screens/MasInfoUser';
+
 const Stack = createNativeStackNavigator()
 
 export default function App() { 
@@ -14,14 +16,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Registro' component={Registro} options ={
-          {
-            headerShown:false
-          }
-        }/>
+          { headerShown:false} }/>
         <Stack.Screen name='HomeNav' component={HomeNav} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}} />
         <Stack.Screen name='ProfileAmigo' component={ProfileAmigo} options={{headerShown:false}} />
         <Stack.Screen name='Comment' component={Comment} options={{headerShown:false}} />
+        <Stack.Screen name='MasInfoUser' component={MasInfoUser} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
