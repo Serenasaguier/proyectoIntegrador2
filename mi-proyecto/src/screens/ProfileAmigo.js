@@ -1,23 +1,24 @@
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, FlatList, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
 import ProfileData from '../components/ProfileData'
+import Posts from '../components/Posts'
 import Post from '../components/Post'
 
- class Profile extends Component {
-  
+
+export default class ProfileAmigo extends Component {
     constructor(props){
         super(props)
         this.state={
-            usuarios: {},
+            usuarios: [],
             loading: true,
             posteos: [],
-            props: props
+            props: props,
+            infoUsuario: '',
         }
     }
-
     componentDidMount(){
-        db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+        db.collection('users').where('owner', '==', this.state.props.route.params.email).onSnapshot(
             docs => {
               docs.forEach(doc => {
                   this.setState({
@@ -26,16 +27,14 @@ import Post from '../components/Post'
               })
           }
         )
-        db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
+        db.collection('posts').where('owner', '==',  this.state.props.route.params.email).onSnapshot(
           docs =>{
             let post=[];
             docs.forEach(doc => {
               post.push({
                 id: doc.id,
                 data: doc.data(),
-              
               })
-              
               this.setState({
                   posteos: post,
               }) 
@@ -43,52 +42,39 @@ import Post from '../components/Post'
           }
         )
       }
-  
-  
   render() {
-    console.log(this.state.posteos);
-    console.log(this.state.usuarios)
     return (
-      
-      <View style={styles.contenedor}>
-                  
-          <View style={styles.perfilInfo}>
+        <View style={styles.contenedor}>
 
-            <Text>{this.state.usuarios.owner}</Text>
-            
-            {this.state.usuarios.miniBio !=  '' 
-              ?
-              <Text>Bio: {this.state.usuarios.miniBio}</Text>
-              :
-               null
-            } 
-          {this.state.usuarios.userName !==  '' 
-         ?
-         <Text>User: {this.state.usuarios.userName}</Text>
-         :
-         null
-         }   
-            <Text>Cantidad de posteos: {this.state.posteos.length}</Text>   
-          </View>
+        <View style={styles.perfilInfo}>
+          <Text>{this.state.usuarios.owner}</Text>
+          <Text>User: {this.state.usuarios.userName}</Text>
+          <Text>Bio: {this.state.usuarios.miniBio}</Text>
+          <Text>Cantidad de posteos: {this.state.posteos.length}</Text>   
+        </View>
+        <Posts/>
+        <View style={styles.feedfotos}>
+        
+        <Posts data={this.state.post} navigation={this.props.navigation} />
+        
 
-          
-          <FlatList 
+        </View>
+        
+       
+        <FlatList 
           style={styles.flatList}
           data={this.state.posteos}
           keyExtractor={(item)=> item.id.toString()}
           renderItem={({item})=> <Post data={item} navigation={this.props.navigation}/> }
         />
         
-          <ProfileData navigation={this.props.navigation}/>
-          
-          
-      
-      </View>
-    )
-  }
+        
+    
+    </View>
+  )
 }
 
-export default Profile
+}
 const styles= StyleSheet.create({
   
   contenedor: {

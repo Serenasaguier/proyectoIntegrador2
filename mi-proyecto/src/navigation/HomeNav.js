@@ -6,6 +6,7 @@ import NewPost from '../screens/NewPost'
 import StackNav from './StackNav';
 import Feed from '../screens/Feed';
 import Comment from '../screens/Comment';
+import ProfileAmigo from '../screens/ProfileAmigo';
 
 
 const Tab = createBottomTabNavigator()
@@ -27,6 +28,7 @@ export default function HomeNav() {
         <Tab.Screen name='Profile' component={Profile} options={ 
           {headerShown:false, tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
         }  />
+      
 
       
     </Tab.Navigator>

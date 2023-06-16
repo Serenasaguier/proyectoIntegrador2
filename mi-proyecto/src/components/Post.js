@@ -84,11 +84,11 @@ export default class Post extends Component {
 }
 
   render() {  
-    console.log(this.props)
+    
     return (
       <View style={style.contenido}>
       <View style={style.cardContainer} >
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', { email: this.props.data.data.owner })}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileAmigo', { email: this.props.data.data.owner })}>
         <Text style={style.creador}>{this.props.data.data.owner}</Text>
           </TouchableOpacity>
         
