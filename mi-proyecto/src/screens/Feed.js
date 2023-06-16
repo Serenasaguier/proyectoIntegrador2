@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ActivityIndicator} from 'react-native'
+import { View, StyleSheet, ActivityIndicator} from 'react-native'
 import React, { Component} from 'react'
 import { db } from '../firebase/config'
 import Posts from '../components/Posts'
@@ -22,7 +22,6 @@ export default class Feed extends Component {
                 id: doc.id,
                 data:doc.data()
             }))
-            console.log(arrayDocs)
             this.setState({
                 posts: arrayDocs,
                 loader: false
@@ -51,20 +50,5 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
 
-},image: {
-    textAlign: 'center',
-    width: '40%',
-    height: undefined,
-    aspectRatio: 20 / 10,
-    margin: 10
-
-},title: {
-    fontWeight: 600,
-    color: 'rgb(255,255,255)',
-    fontSize: 24,
-    textAlign: 'center'
-
-},flatList: {
-    width: '100%'
 }
 })

@@ -14,8 +14,8 @@ export default class FormComment extends Component {
         }
     }
 
+    
     componentDidMount() {
-        // no se pq no funciona .orderBy('createdAt', 'desc')
         console.log(this.props)
         db.collection('posts')
           .doc(this.props.idComments)
@@ -40,6 +40,14 @@ export default class FormComment extends Component {
                 comentario: comentario
             })
         })
+        .then(()=> {
+          this.setState({
+              comentario: '', // limpia el campo para hacer el comentario nuevo
+          })
+      })
+      .catch((error)=> {
+          console.log(error);
+      })
     }
     }
 

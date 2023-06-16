@@ -1,4 +1,4 @@
-import { Text, View, FlatList, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import Post from './Post'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, FlatList  } from 'react-native'
+import { Text, View, TextInput, StyleSheet, FlatList  } from 'react-native'
 import {db} from '../firebase/config'
 
 export default class Buscador extends Component {

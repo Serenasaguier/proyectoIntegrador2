@@ -1,9 +1,10 @@
-import { Text, View, FlatList, StyleSheet } from 'react-native'
+import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import { auth, db } from '../firebase/config'
-import ProfileData from '../components/ProfileData'
+import { db } from '../firebase/config'
 import Posts from '../components/Posts'
 import Post from '../components/Post'
+
+import { AntDesign } from '@expo/vector-icons';
 
 
 export default class ProfileAmigo extends Component {
@@ -42,11 +43,29 @@ export default class ProfileAmigo extends Component {
           }
         )
       }
+
+
+      logout(){
+        auth.signOut()
+        .then(resp => this.props.navigation.navigate('Login'))
+        .catch(err=> console.log(err))
+    }
+
   render() {
     return (
-        <View style={styles.contenedor}>
+        <View style={styles.contenido}>
 
-        <View style={styles.perfilInfo}>
+        <TouchableOpacity
+          style={styles.flecha}
+          onPress={() => this.props.navigation.navigate('Feed')}
+        >
+          <Text>
+            <AntDesign name='arrowleft' size={24} color='black' />
+            BACK
+          </Text>
+        </TouchableOpacity>
+
+        <View style={styles.cardContainer}>
           <Text>{this.state.usuarios.owner}</Text>
           <Text>User: {this.state.usuarios.userName}</Text>
           <Text>Bio: {this.state.usuarios.miniBio}</Text>
@@ -61,13 +80,22 @@ export default class ProfileAmigo extends Component {
         </View>
         
        
-        <FlatList 
+        {
+            this.state.posteos.length === 0 ?
+            <Text style={styles.cardContainer} >El usuario no publico posteos</Text>
+            :
+
+            <FlatList 
           style={styles.flatList}
           data={this.state.posteos}
           keyExtractor={(item)=> item.id.toString()}
           renderItem={({item})=> <Post data={item} navigation={this.props.navigation}/> }
-        />
-        
+        /> 
+          }
+
+      <TouchableOpacity style={styles.btn} onPress={()=> this.logout()} >
+            <Text style={styles.btnText}> Cerrar sesion</Text>
+        </TouchableOpacity>
         
     
     </View>
@@ -86,8 +114,33 @@ const styles= StyleSheet.create({
   feedfotos:{
     flex: 1, 
   },
-  flatList:{
+  contenido: {
+    marginVertical: 15,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     
-  }
+  },cardContainer: {
+    margin: 7,
+    padding: 50,
+    borderWidth: 3,
+    borderRadius: 5,
+    borderColor: 'rgb(177,141,201)',
+    backgroundColor: 'rgb(165,103,205)'
+  },
+    btn:{
+      marginTop: 32, 
+      backgroundColor:'black',
+      padding:10,
+      borderRadius:20,
+      width:200
+  },
+  btnText:{
+      textAlign: 'center',
+      fontWeight:'bold',
+      color: 'white',
+      backgroundColor: "rgb(165,103,205)",
+
+  },
 
 })

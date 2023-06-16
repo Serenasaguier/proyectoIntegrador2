@@ -1,6 +1,5 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React, { Component } from "react";
-import { AntDesign } from "@expo/vector-icons";
 import { db, auth } from "../firebase/config";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import firebase from "firebase";
@@ -17,7 +16,6 @@ export default class Post extends Component {
 
   //mandar like a firebase
   componentDidMount() {
-    console.log(this.props, this.props.data.data.foto, 'asd')
     let estaLikeado = this.props.data.data.likes.includes(
       auth.currentUser.email
     );

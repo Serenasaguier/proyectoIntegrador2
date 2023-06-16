@@ -1,7 +1,6 @@
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import FormComment from '../components/FormComment'
-import { db } from '../firebase/config'
 import { AntDesign } from '@expo/vector-icons';
 
 class Comment extends Component {
@@ -33,22 +32,6 @@ class Comment extends Component {
 }
 
 const styles = StyleSheet.create({
-  comentarios: {
-    padding: 10,
-    flexDirection: 'column',
-    flex: 10
-  },
-  boton: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  btn: {
-    marginTop: 32,
-    backgroundColor: '#54d0e0',
-    padding: 10,
-    borderRadius: 20
-  },
   flecha: {
     alignItems: 'start'
   },    

@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-  Image,
-} from "react-native";
-// import logo from '../../assets/logo.png';
-import Card from "../components/Card";
+import {View, Text, StyleSheet} from "react-native";
 import { db } from "../firebase/config";
 import Posts from '../components/Posts'
 
@@ -45,20 +35,7 @@ class Home extends Component {
   render() {
     return (
       <View style={style.container}>
-        <Text> asd</Text>
         <Posts data={this.state.posteos} />
-        {/* {this.state.loader === true ? (
-          <ActivityIndicator size="large" color="green" />
-        ) : (
-          <FlatList
-            style={style.flatList}
-            data={this.state.posteos}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Card data={item} homeProps={this.props} />
-            )}
-          />
-        )} */}
       </View>
     );
   }
@@ -66,9 +43,7 @@ class Home extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "rgb(0,0,0)",
     color: "rgb(255,255,255)",
-    // justifyContent: "center",
     alignItems: "center",
   },
   image: {

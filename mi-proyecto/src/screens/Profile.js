@@ -1,8 +1,10 @@
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
-import ProfileData from '../components/ProfileData'
 import Post from '../components/Post'
+
+import fotoPerfilVacia from '../../assets/fotoPerfilVacia.png';
+
 
  class Profile extends Component {
   
@@ -43,16 +45,21 @@ import Post from '../components/Post'
           }
         )
       }
+
+      logout(){
+        auth.signOut()
+        .then(resp => this.props.navigation.navigate('Login'))
+        .catch(err=> console.log(err))
+    }
   
   
   render() {
-    console.log(this.state.posteos);
-    console.log(this.state.usuarios)
     return (
       
-      <View style={styles.contenedor}>
+      <View style={styles.contenido}>
+        
                   
-          <View style={styles.perfilInfo}>
+          <View style={styles.cardContainer}>
 
             <Text>{this.state.usuarios.owner}</Text>
             
@@ -67,20 +74,31 @@ import Post from '../components/Post'
          :
          null
          }   
-            <Text>Cantidad de posteos: {this.state.posteos.length}</Text>   
+            <Text>Cantidad de posteos: {this.state.posteos.length}</Text> 
+
+            <Image
+            style={styles.image}
+            source={this.state.usuarios.fotoPerfil === '' ? fotoPerfilVacia : this.state.usuarios.fotoPerfil}
+             />
+            
           </View>
 
-          
-          <FlatList 
+          {
+            this.state.posteos.length === 0 ?
+            <Text style={styles.cardContainer} >No publicaste ningun posteo todavia</Text>
+            :
+
+            <FlatList 
           style={styles.flatList}
           data={this.state.posteos}
           keyExtractor={(item)=> item.id.toString()}
           renderItem={({item})=> <Post data={item} navigation={this.props.navigation}/> }
-        />
-        
-          <ProfileData navigation={this.props.navigation}/>
-          
-          
+        /> 
+          }
+
+        <TouchableOpacity style={styles.btn} onPress={()=> this.logout()} >
+            <Text style={styles.btnText}> Cerrar sesion</Text>
+        </TouchableOpacity>
       
       </View>
     )
@@ -90,8 +108,12 @@ import Post from '../components/Post'
 export default Profile
 const styles= StyleSheet.create({
   
-  contenedor: {
+  contenido: {
+    marginVertical: 15,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    
   },
   perfilInfo:{
     flex: 1,
@@ -99,8 +121,31 @@ const styles= StyleSheet.create({
   feedfotos:{
     flex: 1, 
   },
-  flatList:{
-    
+  cardContainer: {
+    margin: 7,
+    padding: 50,
+    borderWidth: 3,
+    borderRadius: 5,
+    borderColor: 'rgb(177,141,201)',
+    backgroundColor: 'rgb(165,103,205)'},
+    image: {
+      width: 100,
+      height: 100,
+      borderRadius: 30,
+  },
+  btn:{
+      marginTop: 32, 
+      backgroundColor:'black',
+      padding:10,
+      borderRadius:20,
+      width:200
+  },
+  btnText:{
+      textAlign: 'center',
+      fontWeight:'bold',
+      color: 'white',
+      backgroundColor: "rgb(165,103,205)",
+
   }
 
 })

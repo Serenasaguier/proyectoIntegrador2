@@ -1,14 +1,6 @@
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import {Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { auth, db } from "../firebase/config";
 import React, { Component } from "react";
-import Login from "../screens/Login";
 
 class FormularioRegistro extends Component {
   constructor(props) {
@@ -23,13 +15,13 @@ class FormularioRegistro extends Component {
     };
   }
 
-  /* componentDidMount(){
+   componentDidMount(){
     auth.onAuthStateChanged(user => {
       if(user){
         this.props.navigation.navigate('HomeNav')
       }
     })
-  } */
+  } 
 
   registrarUsuario(mail, password, userName, miniBio) {
     if (mail === "" || password === "" || userName === "") {

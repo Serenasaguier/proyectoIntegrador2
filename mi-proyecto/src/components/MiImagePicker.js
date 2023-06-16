@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 import { storage } from '../firebase/config'
 
+import { AntDesign } from '@expo/vector-icons'; 
+
 export default class MiImagePicker extends Component {
     constructor(props){
         super(props)
@@ -11,12 +13,14 @@ export default class MiImagePicker extends Component {
         }
     }
 
+    // busque imagen en la libreria
     activarPicker() {
         ImagePicker.launchImageLibraryAsync()
         .then(imgData => this.setState({imgDeFototeca: imgData.assets[0].uri}))
         .catch( err => console.log(err))
     }
 
+    //acepte imagen que eligio
     aceptarImagen(){
         fetch(this.state.imgDeFototeca)
         .then(resp => resp.blob()) // con blob la parseamos
@@ -31,13 +35,14 @@ export default class MiImagePicker extends Component {
         .catch( err => console.log(err))
     }
 
+    //rechaze imagen que eligio
     rechazarImagen(){
         this.setState({imgDeFototeca: ''})
     }
 
   render() {
     return (
-      <View>
+      <View style={styles.contenido}>
         {
             this.state.imgDeFototeca !== '' ?
                 <>
@@ -48,21 +53,22 @@ export default class MiImagePicker extends Component {
                     <TouchableOpacity
                     onPress={()=> this.aceptarImagen()}
                     >
-                        <Text>Aceptar imagen</Text>
+                        <Text style={styles.descripcion}>Aceptar imagen</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                     onPress={()=> this.rechazarImagen()}
                     >
-                        <Text>Rechazar imagen</Text>
+                        <Text style={styles.descripcion}>Rechazar imagen</Text>
                     </TouchableOpacity>
                 </>
             :
             <>
-                <Text>Carga a una foto para tu perfil</Text>
+                <Text style={styles.descripcion}>Carga a una foto para tu perfil</Text>
+                <AntDesign name="picture" size={24} color="black" />
                 <TouchableOpacity
                 onPress={()=> this.activarPicker()}
                 >
-                    <Text>
+                    <Text style={styles.descripcion}>
                         Cargar imagen de mi libreria
                     </Text>
                 </TouchableOpacity>
@@ -75,6 +81,20 @@ export default class MiImagePicker extends Component {
 
 const styles = StyleSheet.create({
     img: {
-        height: 200
-    }
+        height: 300,
+        width: 300,
+        borderRadius: 5, 
+        borderColor:'rgb(177,141,201)'
+    },contenido: {
+        marginVertical: 15,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      },descripcion:{
+        padding: 10,
+        fontSize: 18,
+        margin: 10,
+        backgroundColor: 'rgb(209,181,227)',
+        borderColor: '#C2C2C3'
+       }
 })

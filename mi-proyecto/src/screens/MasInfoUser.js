@@ -1,7 +1,10 @@
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import MiImagePicker from '../components/MiImagePicker'
 import { db } from '../firebase/config'
+import { AntDesign } from '@expo/vector-icons'; 
+
+
 export default class InfoAdicionalUser extends Component {
   constructor(props){
     super(props)
@@ -30,22 +33,22 @@ export default class InfoAdicionalUser extends Component {
   
     render() {
     return (
-      <View>
-        <Text>Aqui vamos a cargar la informacion adicional</Text>
+      <View style={styles.cardContainer}>
         <MiImagePicker actualizarFotoPerfil={(url)=> this.actualizarFotoDePerfil(url)} />
         {
             this.state.fotoDePerfil !== '' ?
         <TouchableOpacity
         onPress={()=> this.actualizarDocDelUsuario()}
         >
-            <Text>
+            <Text style={styles.descripcion}>
                 Añadir foto de perfil
             </Text>
+            <AntDesign name="picture" size={30} color="black" />
         </TouchableOpacity>
         : null
         }
-        <TouchableOpacity>
-            <Text>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Feed')}>
+            <Text style={styles.descripcion}>
                 Omitir este paso
             </Text>
         </TouchableOpacity>
@@ -53,3 +56,29 @@ export default class InfoAdicionalUser extends Component {
     )
   }
 }
+
+const styles= StyleSheet.create({
+  
+  contenido: {
+    marginVertical: 15,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+    cardContainer: {
+      margin: 7,
+      padding: 50,
+      borderWidth: 3,
+      borderRadius: 5,
+      borderColor: 'rgb(177,141,201)',
+      backgroundColor: 'rgb(165,103,205)'
+   },
+   descripcion:{
+    padding: 10,
+    fontSize: 18,
+    margin: 10,
+    backgroundColor: 'rgb(209,181,227)',
+    borderColor: '#C2C2C3'
+   }
+
+})
