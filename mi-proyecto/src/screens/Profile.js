@@ -60,8 +60,7 @@ import Post from '../components/Post'
               ?
               <Text>Bio: {this.state.usuarios.miniBio}</Text>
               :
-               null
-            } 
+               null} 
           {this.state.usuarios.userName !==  '' 
          ?
          <Text>User: {this.state.usuarios.userName}</Text>
