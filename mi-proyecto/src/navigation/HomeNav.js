@@ -6,7 +6,7 @@ import NewPost from '../screens/NewPost'
 import StackNav from './StackNav';
 import Feed from '../screens/Feed';
 import Comment from '../screens/Comment';
-import ProfileAmigo from '../screens/ProfileAmigo';
+import Buscador from '../screens/Buscador';
 
 
 const Tab = createBottomTabNavigator()
@@ -28,7 +28,9 @@ export default function HomeNav() {
         <Tab.Screen name='Profile' component={Profile} options={ 
           {headerShown:false, tabBarIcon: ()=> <AntDesign name="profile" size={24} color="orange" />}
         }  />
-      
+       <Tab.Screen name='Buscar' component={Buscador} options={ 
+          {headerShown:false, tabBarIcon: ()=> <AntDesign name="" size={24} color="orange" />}
+        }  />
 
       
     </Tab.Navigator>
