@@ -2,6 +2,7 @@ import { Text, View, FlatList, StyleSheet, Image, TouchableOpacity } from 'react
 import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
 import Post from '../components/Post'
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 import fotoPerfilVacia from '../../assets/fotoPerfilVacia.png';
 
@@ -75,6 +76,14 @@ import fotoPerfilVacia from '../../assets/fotoPerfilVacia.png';
          null
          }   
             <Text>Cantidad de posteos: {this.state.posteos.length}</Text> 
+            
+        <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate("EditProfile")}>
+                    <Text style={styles}>
+                        <FontAwesome name="gear" size={22} />
+                        Editar Perfil
+                    </Text>
+                </TouchableOpacity>
 
             <Image
             style={styles.image}
@@ -99,6 +108,8 @@ import fotoPerfilVacia from '../../assets/fotoPerfilVacia.png';
         <TouchableOpacity style={styles.btn} onPress={()=> this.logout()} >
             <Text style={styles.btnText}> Cerrar sesion</Text>
         </TouchableOpacity>
+
+
       
       </View>
     )
@@ -128,9 +139,9 @@ const styles= StyleSheet.create({
     borderRadius: 5,
     borderColor: 'rgb(177,141,201)',
     backgroundColor: 'rgb(165,103,205)'},
+    
     image: {
-      width: 100,
-      height: 100,
+     
       borderRadius: 30,
   },
   btn:{

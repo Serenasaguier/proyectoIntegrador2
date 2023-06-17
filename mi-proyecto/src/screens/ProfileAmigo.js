@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { db } from '../firebase/config'
 import Posts from '../components/Posts'
 import Post from '../components/Post'
-
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons';
 
 
@@ -93,10 +93,7 @@ export default class ProfileAmigo extends Component {
         /> 
           }
 
-      <TouchableOpacity style={styles.btn} onPress={()=> this.logout()} >
-            <Text style={styles.btnText}> Cerrar sesion</Text>
-        </TouchableOpacity>
-        
+    
     
     </View>
   )

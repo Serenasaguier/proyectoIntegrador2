@@ -8,6 +8,7 @@ import Home from './src/screens/Home'
 import Comment from './src/screens/Comment';
 import ProfileAmigo from './src/screens/ProfileAmigo';
 import MasInfoUser from './src/screens/MasInfoUser';
+import EditProfile from './src/screens/EditProfile';
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name='ProfileAmigo' component={ProfileAmigo} options={{headerShown:false}} />
         <Stack.Screen name='Comment' component={Comment} options={{headerShown:false}} />
         <Stack.Screen name='MasInfoUser' component={MasInfoUser} options={{headerShown:false}} />
+        <Stack.Screen name='EditProfile' component={EditProfile} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
