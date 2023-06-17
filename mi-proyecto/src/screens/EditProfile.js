@@ -95,9 +95,10 @@ export default class EditProfile extends Component {
 
         <TextInput style={styles.input}
           placeholder='password...'
-          keyboardType='Password'
+          keyboardType='password'
           onChangeText={texto => this.setState({ password: texto })}
           value={this.state.password}
+          secureTextEntry={true}
         />
 
         <TextInput style={styles.input}
